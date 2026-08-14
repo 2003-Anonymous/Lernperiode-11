@@ -9,7 +9,7 @@ Ich möchte einen Vokabeltrainer mit Avalonia programmieren, um damit Polnisch z
 
 ## 14.8
 
-- [ ] Als Benutzer möchte ich neue Wörter hinzufügen können, damit ich neue Wörter lernen kann.
+- [x] Als Benutzer möchte ich mit der App interagieren können, damit ich sie benutzen kann.
 - [x] Mich über Avalonia informieren
 - [x] Projekt erstellen und "Hello World" ausgeben.
 
