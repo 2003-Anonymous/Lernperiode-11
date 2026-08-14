@@ -10,9 +10,14 @@ Ich möchte einen Vokabeltrainer mit Avalonia programmieren, um damit Polnisch z
 ## 14.8
 
 - [ ] Als Benutzer möchte ich neue Wörter hinzufügen können, damit ich neue Wörter lernen kann.
-- [ ] Mich über Avalonia informieren
-- [ ] Projekt erstellen und "Hello World" ausgeben.
+- [x] Mich über Avalonia informieren
+- [x] Projekt erstellen und "Hello World" ausgeben.
 
-✍️ Heute habe ich... (50-100 Wörter)
+Heute habe ich ein Projekt mit Avalonia erstellt. Das hat ein wenig gedauert, da ich es in Visual Studio machen wollte und dafür zuerst VS aktualisieren musste, da die Avalonia Extension nicht da war. Weil das so lange gedauert hat, habe ich zu VS Code gewechselt. Dort war das ganze dann relativ schnell eingerichtet. Danach habe ich begonnen, dem Toutorial der Avalonia dokumentation zu folgen und ich habe einen Button mit dem Text "Hello World" darüber erstellt.
 
-☝️ Vergessen Sie nicht, einen ersten Code und Skizze auf github hochzuladen!
+## 21.8
+
+- [ ] Eine Liste mit Wörtern mit Bedeutung erstellen, welche dann in der App angezeigt wird.
+- [ ] Einen Button hinzufügen, mit dem ich eine neue Seite öffnen kann, wo dann später die Wörter gefragt werden.
+- [ ] Einen Button auf der neuen Seite hinzufügen, mit dem man zum nächsten Wort wechseln kann
+- [ ] Die Wörter sollen einzeln auf der neuen Seite angezeigt werden
