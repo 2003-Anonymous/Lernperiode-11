@@ -17,7 +17,9 @@ Heute habe ich ein Projekt mit Avalonia erstellt. Das hat ein wenig gedauert, da
 
 ## 21.8
 
-- [ ] Eine Liste mit Wörtern mit Bedeutung erstellen, welche dann in der App angezeigt wird.
-- [ ] Einen Button hinzufügen, mit dem ich eine neue Seite öffnen kann, wo dann später die Wörter gefragt werden.
+- [x] Eine Liste mit Wörtern mit Bedeutung erstellen, welche dann in der App angezeigt wird.
+- [ ] Einen Button hinzufügen, mit dem ich eine neue Seite öffnen kann, wo die Wortliste angezeigt  wird.
 - [ ] Einen Button auf der neuen Seite hinzufügen, mit dem man zum nächsten Wort wechseln kann
 - [ ] Die Wörter sollen einzeln auf der neuen Seite angezeigt werden
+
+Heute habe ich eine kurze Wortliste als Beispiel erstellt, welche in der App dargestellt wird. Mit dieser Liste werden ich weiterarbeiten.
