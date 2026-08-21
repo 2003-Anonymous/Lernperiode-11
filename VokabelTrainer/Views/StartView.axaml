@@ -1,0 +1,19 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:VokabelTrainer.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="320" d:DesignHeight="660"
+             x:Class="VokabelTrainer.Views.StartView"
+             x:DataType="vm:StartViewModel">
+
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="20">
+        <TextBlock Text="Vokabeltrainer"
+                   FontSize="32"
+                   HorizontalAlignment="Center" />
+        <Button Content="Lernen starten"
+                Command="{Binding StartCommand}"
+                HorizontalAlignment="Center"
+                Padding="20,10" />
+    </StackPanel>
+</UserControl>

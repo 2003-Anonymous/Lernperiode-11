@@ -1,0 +1,36 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:VokabelTrainer.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="320" d:DesignHeight="660"
+             x:Class="VokabelTrainer.Views.LearnView"
+             x:DataType="vm:LearnViewModel">
+
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="20">
+
+        <Button Command="{Binding ShowAnswerCommand}"
+                Background="Transparent"
+                HorizontalAlignment="Center">
+            <StackPanel Spacing="10">
+                <TextBlock Text="{Binding Question}"
+                           FontSize="36"
+                           HorizontalAlignment="Center" />
+                <TextBlock Text="{Binding Answer}"
+                           FontSize="28"
+                           Foreground="Gray"
+                           HorizontalAlignment="Center"
+                           IsVisible="{Binding AnswerVisible}" />
+            </StackPanel>
+        </Button>
+
+        <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
+            <Button Content="Nicht gewusst" Command="{Binding NotKnownCommand}" />
+            <Button Content="Gewusst"       Command="{Binding KnownCommand}" />
+        </StackPanel>
+
+        <Button Content="Weiter"
+                Command="{Binding NextCommand}"
+                HorizontalAlignment="Center" />
+    </StackPanel>
+</UserControl>
