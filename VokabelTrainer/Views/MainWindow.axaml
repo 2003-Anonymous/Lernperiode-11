@@ -15,15 +15,15 @@
         <vm:MainViewModel />
     </Design.DataContext>
 
-    <StackPanel>
+    <StackPanel Margin="10">
         <TextBlock Margin="5"
                    FontSize="24"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
-                   Text="Hello World">
+                   Text="Vokabeln">
 
         </TextBlock>
-        <Button HorizontalAlignment="Center" VerticalAlignment="Center">Button</Button>
+        <ListBox ItemsSource="{Binding Woerter}" />
     </StackPanel>
 
 </Window>
