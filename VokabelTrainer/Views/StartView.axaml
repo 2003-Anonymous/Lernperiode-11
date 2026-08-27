@@ -15,5 +15,9 @@
                 Command="{Binding StartCommand}"
                 HorizontalAlignment="Center"
                 Padding="20,10" />
+        <Button Content="Wortliste ansehen"
+                Command="{Binding ShowWordListCommand}"
+                HorizontalAlignment="Center"
+                Padding="20,10" />
     </StackPanel>
 </UserControl>

@@ -17,6 +17,7 @@ public partial class MainViewModel : ViewModelBase
 
     public void ShowStart() => CurrentPage = new StartViewModel(this);
     public void ShowLearn() => CurrentPage = new LearnViewModel(this);
+    public void ShowWordList() => CurrentPage = new WordListViewModel(this);
 
     // Die Lernseite reicht ihre Ergebnisse hier durch an die Ergebnisseite.
     public void ShowResult(List<Word> known, List<Word> unknown)

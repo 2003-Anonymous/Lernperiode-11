@@ -14,4 +14,7 @@ public partial class StartViewModel : ViewModelBase
     // Wird zu StartCommand -> Binding in StartView.axaml
     [RelayCommand]
     private void Start() => _main.ShowLearn();
+
+    [RelayCommand]
+    private void ShowWordList() => _main.ShowWordList();
 }

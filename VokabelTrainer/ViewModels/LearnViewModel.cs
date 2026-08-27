@@ -9,14 +9,7 @@ public partial class LearnViewModel : ViewModelBase
 {
     private readonly MainViewModel _main;
 
-    private readonly List<Word> _words =
-    [
-        new Word("Apfel", "jablko"),
-        new Word("Brot",  "chleb"),
-        new Word("Katze", "kot"),
-        new Word("Tiger", "tygrys"),
-        new Word("Biber", "bober"),
-    ];
+    private readonly List<Word> _words = WordList.Words;
 
     private int _index;
 

@@ -1,0 +1,55 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:VokabelTrainer.ViewModels"
+             xmlns:models="using:VokabelTrainer.Models"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="320" d:DesignHeight="660"
+             x:Class="VokabelTrainer.Views.WordListView"
+             x:DataType="vm:WordListViewModel">
+
+    <Grid RowDefinitions="Auto,Auto,*,Auto" Margin="20,20,20,20">
+
+        <TextBlock Grid.Row="0"
+                   Text="Wortliste"
+                   FontSize="32"
+                   HorizontalAlignment="Center" />
+
+        <TextBlock Grid.Row="1"
+                   Text="{Binding CountText}"
+                   FontSize="16"
+                   Foreground="Gray"
+                   Margin="0,4,0,12"
+                   HorizontalAlignment="Center" />
+
+        <ScrollViewer Grid.Row="2">
+            <ItemsControl ItemsSource="{Binding Words}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="models:Word">
+                        <Grid ColumnDefinitions="*,*" Margin="0,6">
+                            <TextBlock Grid.Column="0"
+                                       Text="{Binding German}"
+                                       FontSize="20"
+                                       TextWrapping="Wrap" />
+                            <TextBlock Grid.Column="1"
+                                       Text="{Binding ForeignLanguage}"
+                                       FontSize="20"
+                                       Foreground="Gray"
+                                       TextWrapping="Wrap" />
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="3" Spacing="10" Margin="0,16,0,0">
+            <Button Content="Abfrage starten"
+                    Command="{Binding StartCommand}"
+                    HorizontalAlignment="Center"
+                    Padding="20,10" />
+            <Button Content="Zurück"
+                    Command="{Binding ReturnHomeCommand}"
+                    HorizontalAlignment="Center" />
+        </StackPanel>
+    </Grid>
+</UserControl>
