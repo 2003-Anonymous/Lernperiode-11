@@ -10,22 +10,24 @@ Ich möchte einen Vokabeltrainer mit Avalonia programmieren, um damit Polnisch z
 ## 14.8
 
 - [x] Als Benutzer möchte ich mit der App interagieren können, damit ich sie benutzen kann.
-- [x] Mich über Avalonia informieren
-- [x] Projekt erstellen und "Hello World" ausgeben.
+- [x] Als Entwickler möchte ich mich über Avalonia informieren, damit ich weiss, wie ich die App entwickeln kann.
+- [x] Als Entwickler möchte ich ein Avalonia Projekt erstellen und "Hello World" ausgeben, damit ich eine lauffähige Grundlage für die weitere Entwicklung habe.
 
 Heute habe ich ein Projekt mit Avalonia erstellt. Das hat ein wenig gedauert, da ich es in Visual Studio machen wollte und dafür zuerst VS aktualisieren musste, da die Avalonia Extension nicht da war. Weil das so lange gedauert hat, habe ich zu VS Code gewechselt. Dort war das ganze dann relativ schnell eingerichtet. Danach habe ich begonnen, dem Toutorial der Avalonia dokumentation zu folgen und ich habe einen Button mit dem Text "Hello World" darüber erstellt.
 
 ## 21.8
 
-- [x] Eine Liste mit Wörtern mit Bedeutung erstellen, welche dann in der App angezeigt wird.
-- [x] Einen Button hinzufügen, mit dem ich eine neue Seite öffnen kann, wo die Wortliste angezeigt  wird.
-- [x] Einen Button auf der neuen Seite hinzufügen, mit dem man zum nächsten Wort wechseln kann
-- [x] Die Wörter sollen einzeln auf der neuen Seite angezeigt werden
+- [x] Als Benutzer möchte ich eine Liste mit Wörtern und ihren Bedeutungen sehen, damit ich weiss, welche Wörter ich lernen kann.
+- [x] Als Benutzer möchte ich über einen Button eine neue Seite öffnen können, damit ich von der Startseite zur Wortliste gelange.
+- [x] Als Benutzer möchte ich die Wörter einzeln angezeigt bekommen, damit ich mich beim Lernen auf ein Wort konzentrieren kann.
+- [x] Als Benutzer möchte ich mit einem Button zum nächsten Wort wechseln können, damit ich die Liste in meinem eigenen Tempo durcharbeiten kann.
 
 Heute habe ich eine kurze Wortliste als Beispiel erstellt, welche in der App dargestellt wird. Mit dieser Liste werden ich weiterarbeiten. Als nächstes habe ich programmiert, dass beim Starten ein neuer Viewer erstellt wird. Dort werden dann die Wörter einzeln auf Deutsch angezeigt. Wenn man das Wort anklickt, wird die Übersetzung angezeigt. Darunter kann man auswählen, ob man das Wort gewusst hat, oder nicht. Am Schluss wird noch angezeigt, wie viele Wörter man gewusst hat. Das mit den verschiedenen Viewern fand ich recht kompliziert. Vor allem, wie man diese miteinander verbindet und in welche Datei man welchen Codeteil schreibt. Ich habe dann Claude darum gebeten, mir eine Erklärung und Anleitung zu machen, wie ich das Umsetzen kann, was ich möchte. Auch trotz Anleitung war das nicht so einfach und ich habe noch nicht alles verstanden.
 
 ## 28.8
 
-- [ ] Die Wortliste soll vor dem Start mit Übersetzung angezeigt werden, damit man sie vor dem Abfragen noch einmal anschauen kann.
-- [ ] Dort kann man dann neue Wörter hinzufügen, entfernen oder bearbeiten.
-- [ ] Die Wörter sollen dauerhaft in einer Datenbank gespeichert werden.
+- [x] Als Benutzer möchte ich die Wortliste mit Übersetzungen vor dem Start ansehen können, damit ich die Wörter vor dem Abfragen noch einmal repetieren kann.
+- [ ] Als Benutzer möchte ich in dieser Ansicht Wörter hinzufügen, bearbeiten und löschen können, damit ich die Liste an meinen aktuellen Lernstoff anpassen kann.
+- [ ] Als Benutzer möchte ich, dass meine Wörter dauerhaft in einer Datenbank gespeichert werden, damit sie nach dem Schliessen der App noch vorhanden sind.
+
+Heute habe ich programmiert, dass ich von der Homeseite aus die Wörterliste ansehen und auch gleich üben kann. So kann man die Wörter vor dem Abfragen nochmals lernen. Um eine bessere Darstellung von der App zu haben, habe ich noch die Grösse des Fensters auf meine Handygrösse angepasst. So kann ich mir die App besser vorstellen.
