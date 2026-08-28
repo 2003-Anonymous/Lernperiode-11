@@ -8,7 +8,7 @@
              x:Class="VokabelTrainer.Views.WordListView"
              x:DataType="vm:WordListViewModel">
 
-    <Grid RowDefinitions="Auto,Auto,*,Auto" Margin="20,20,20,20">
+    <Grid RowDefinitions="Auto,Auto,*,Auto,Auto" Margin="20,20,20,20">
 
         <TextBlock Grid.Row="0"
                    Text="Wortliste"
@@ -22,27 +22,56 @@
                    Margin="0,4,0,12"
                    HorizontalAlignment="Center" />
 
-        <ScrollViewer Grid.Row="2">
-            <ItemsControl ItemsSource="{Binding Words}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="models:Word">
-                        <Grid ColumnDefinitions="*,*" Margin="0,6">
-                            <TextBlock Grid.Column="0"
-                                       Text="{Binding German}"
-                                       FontSize="20"
-                                       TextWrapping="Wrap" />
-                            <TextBlock Grid.Column="1"
-                                       Text="{Binding ForeignLanguage}"
-                                       FontSize="20"
-                                       Foreground="Gray"
-                                       TextWrapping="Wrap" />
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+        <ListBox Grid.Row="2"
+                 ItemsSource="{Binding Words}"
+                 SelectedItem="{Binding SelectedWord}">
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="models:Word">
+                    <Grid ColumnDefinitions="*,*">
+                        <TextBlock Grid.Column="0"
+                                   Text="{Binding German}"
+                                   FontSize="20"
+                                   TextWrapping="Wrap" />
+                        <TextBlock Grid.Column="1"
+                                   Text="{Binding ForeignLanguage}"
+                                   FontSize="20"
+                                   Foreground="Gray"
+                                   TextWrapping="Wrap" />
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
-        <StackPanel Grid.Row="3" Spacing="10" Margin="0,16,0,0">
+        <StackPanel Grid.Row="3" Spacing="6" Margin="0,16,0,0">
+            <TextBlock Text="{Binding EditorTitle}"
+                       FontSize="18" />
+            <TextBox Text="{Binding GermanInput}"
+                     PlaceholderText="Deutsch" />
+            <TextBox Text="{Binding ForeignInput}"
+                     PlaceholderText="Fremdsprache" />
+            <Grid ColumnDefinitions="*,*,*" Margin="0,4,0,0">
+                <Button Grid.Column="0"
+                        Content="Speichern"
+                        Command="{Binding SaveCommand}"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Center"
+                        Margin="0,0,4,0" />
+                <Button Grid.Column="1"
+                        Content="Löschen"
+                        Command="{Binding DeleteCommand}"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Center"
+                        Margin="2,0,2,0" />
+                <Button Grid.Column="2"
+                        Content="Neu"
+                        Command="{Binding NewWordCommand}"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Center"
+                        Margin="4,0,0,0" />
+            </Grid>
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Spacing="10" Margin="0,16,0,0">
             <Button Content="Abfrage starten"
                     Command="{Binding StartCommand}"
                     HorizontalAlignment="Center"

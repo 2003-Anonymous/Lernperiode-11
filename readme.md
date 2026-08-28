@@ -27,7 +27,13 @@ Heute habe ich eine kurze Wortliste als Beispiel erstellt, welche in der App dar
 ## 28.8
 
 - [x] Als Benutzer möchte ich die Wortliste mit Übersetzungen vor dem Start ansehen können, damit ich die Wörter vor dem Abfragen noch einmal repetieren kann.
-- [ ] Als Benutzer möchte ich in dieser Ansicht Wörter hinzufügen, bearbeiten und löschen können, damit ich die Liste an meinen aktuellen Lernstoff anpassen kann.
-- [ ] Als Benutzer möchte ich, dass meine Wörter dauerhaft in einer Datenbank gespeichert werden, damit sie nach dem Schliessen der App noch vorhanden sind.
+- [x] Als Benutzer möchte ich in dieser Ansicht Wörter hinzufügen, bearbeiten und löschen können, damit ich die Liste an meinen aktuellen Lernstoff anpassen kann.
+- [x] Als Benutzer möchte ich, dass meine Wörter dauerhaft in einer Datenbank gespeichert werden, damit sie nach dem Schliessen der App noch vorhanden sind.
 
 Heute habe ich programmiert, dass ich von der Homeseite aus die Wörterliste ansehen und auch gleich üben kann. So kann man die Wörter vor dem Abfragen nochmals lernen. Um eine bessere Darstellung von der App zu haben, habe ich noch die Grösse des Fensters auf meine Handygrösse angepasst. So kann ich mir die App besser vorstellen.
+
+## 4.9
+
+- [ ] Als Benutzer möchte ich gelernte Wörter als "gelernt" markieren können, damit ich beim Üben nur noch die Wörter sehe, die ich noch nicht kann.
+- [ ] Als Benutzer möchte ich die Wörter in zufälliger Reihenfolge abgefragt bekommen, damit ich die Übersetzungen wirklich lerne und nicht nur die Reihenfolge auswendig kann.
+- [ ] Als Benutzer möchte ich in der Wortliste nach einem Wort suchen können, damit ich bei vielen Vokabeln ein bestimmtes Wort schnell finde und bearbeiten kann.

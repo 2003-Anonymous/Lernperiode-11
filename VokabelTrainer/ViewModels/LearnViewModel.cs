@@ -9,7 +9,7 @@ public partial class LearnViewModel : ViewModelBase
 {
     private readonly MainViewModel _main;
 
-    private readonly List<Word> _words = WordList.Words;
+    private readonly List<Word> _words = [.. WordList.Words];
 
     private int _index;
 

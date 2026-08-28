@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using VokabelTrainer.Models;
 using VokabelTrainer.ViewModels;
 using VokabelTrainer.Views;
 
@@ -15,6 +16,8 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        WordList.Load();
+
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindow
