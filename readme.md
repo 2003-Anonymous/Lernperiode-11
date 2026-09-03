@@ -30,7 +30,7 @@ Heute habe ich eine kurze Wortliste als Beispiel erstellt, welche in der App dar
 - [x] Als Benutzer möchte ich in dieser Ansicht Wörter hinzufügen, bearbeiten und löschen können, damit ich die Liste an meinen aktuellen Lernstoff anpassen kann.
 - [x] Als Benutzer möchte ich, dass meine Wörter dauerhaft in einer Datenbank gespeichert werden, damit sie nach dem Schliessen der App noch vorhanden sind.
 
-Heute habe ich programmiert, dass ich von der Homeseite aus die Wörterliste ansehen und auch gleich üben kann. So kann man die Wörter vor dem Abfragen nochmals lernen. Um eine bessere Darstellung von der App zu haben, habe ich noch die Grösse des Fensters auf meine Handygrösse angepasst. So kann ich mir die App besser vorstellen.
+Heute habe ich programmiert, dass ich von der Homeseite aus die Wörterliste ansehen und auch gleich üben kann. So kann man die Wörter vor dem Abfragen nochmals lernen. Um eine bessere Darstellung von der App zu haben, habe ich noch die Grösse des Fensters auf meine Handygrösse angepasst. So kann ich mir die App besser vorstellen. Zudem habe ich hinzugefügt, dass wenn man diese Liste öffnet, man neue Wörter hinzufügen kann. Bereits vorhandene Wörter kann man bearbeiten oder auch löschen. Die Wörter werden in einer SQLight-Datenbank gespeichert.
 
 ## 4.9
 
