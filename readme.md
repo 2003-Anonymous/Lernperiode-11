@@ -37,3 +37,5 @@ Heute habe ich programmiert, dass ich von der Homeseite aus die Wörterliste ans
 - [x] Als Benutzer möchte ich gelernte Wörter als "gelernt" markieren können, damit ich beim Üben nur noch die Wörter sehe, die ich noch nicht kann.
 - [ ] Als Benutzer möchte ich die Wörter in zufälliger Reihenfolge abgefragt bekommen, damit ich die Übersetzungen wirklich lerne und nicht nur die Reihenfolge auswendig kann.
 - [ ] Als Benutzer möchte ich in der Wortliste nach einem Wort suchen können, damit ich bei vielen Vokabeln ein bestimmtes Wort schnell finde und bearbeiten kann.
+
+Heute habe ich hinzugefügt, dass die App speichert, welche Wörter ich schon gewusst habe und welche noch nicht. Beim Lernen kann ich wählen, ob ich nur die offenen oder alle Wörter üben will, und ein gewusstes Wort wird wieder zu einem offenen, sobald ich es beim Lernen als "Nicht gewusst" markiere.
