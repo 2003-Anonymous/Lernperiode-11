@@ -9,6 +9,11 @@
 
     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="20">
 
+        <TextBlock Text="{Binding ProgressText}"
+                   FontSize="16"
+                   Foreground="Gray"
+                   HorizontalAlignment="Center" />
+
         <Button Command="{Binding ShowAnswerCommand}"
                 Background="Transparent"
                 HorizontalAlignment="Center">

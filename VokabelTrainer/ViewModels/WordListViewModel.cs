@@ -12,7 +12,7 @@ public partial class WordListViewModel : ViewModelBase
 
     public ObservableCollection<Word> Words => WordList.Words;
 
-    public string CountText => $"{Words.Count} Wörter";
+    public string CountText => $"{Words.Count} Wörter - {WordList.UnknownCount} offen, {WordList.KnownCount} gewusst";
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(SaveCommand))]
@@ -92,7 +92,7 @@ public partial class WordListViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void Start() => _main.ShowLearn();
+    private void Start() => _main.ShowLearn(false);
 
     [RelayCommand]
     private void ReturnHome() => _main.ShowStart();

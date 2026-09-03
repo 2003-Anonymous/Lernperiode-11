@@ -27,7 +27,7 @@
                  SelectedItem="{Binding SelectedWord}">
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="models:Word">
-                    <Grid ColumnDefinitions="*,*">
+                    <Grid ColumnDefinitions="*,*,Auto">
                         <TextBlock Grid.Column="0"
                                    Text="{Binding German}"
                                    FontSize="20"
@@ -37,6 +37,12 @@
                                    FontSize="20"
                                    Foreground="Gray"
                                    TextWrapping="Wrap" />
+                        <TextBlock Grid.Column="2"
+                                   Text="Gewusst"
+                                   FontSize="12"
+                                   Foreground="Green"
+                                   VerticalAlignment="Center"
+                                   IsVisible="{Binding IsKnown}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

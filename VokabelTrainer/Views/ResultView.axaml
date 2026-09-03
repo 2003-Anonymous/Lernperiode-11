@@ -18,15 +18,23 @@
                    Foreground="Gray"
                    HorizontalAlignment="Center" />
 
-        <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+        <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center"
+                    IsVisible="{Binding HasWords}">
             <TextBlock Text="Gewusst:" FontSize="20" />
             <TextBlock Text="{Binding KnownCount}" FontSize="20" />
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+        <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center"
+                    IsVisible="{Binding HasWords}">
             <TextBlock Text="Nicht gewusst:" FontSize="20" />
             <TextBlock Text="{Binding UnknownCount}" FontSize="20" />
         </StackPanel>
+
+        <Button Content="Offene Wörter weiterlernen"
+                Command="{Binding LearnUnknownCommand}"
+                IsVisible="{Binding CanLearnUnknown}"
+                HorizontalAlignment="Center"
+                Padding="20,10" />
 
         <Button Content="Home"
                 Command="{Binding ReturnHomeCommand}"

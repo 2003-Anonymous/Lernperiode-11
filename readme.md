@@ -34,6 +34,6 @@ Heute habe ich programmiert, dass ich von der Homeseite aus die Wörterliste ans
 
 ## 4.9
 
-- [ ] Als Benutzer möchte ich gelernte Wörter als "gelernt" markieren können, damit ich beim Üben nur noch die Wörter sehe, die ich noch nicht kann.
+- [x] Als Benutzer möchte ich gelernte Wörter als "gelernt" markieren können, damit ich beim Üben nur noch die Wörter sehe, die ich noch nicht kann.
 - [ ] Als Benutzer möchte ich die Wörter in zufälliger Reihenfolge abgefragt bekommen, damit ich die Übersetzungen wirklich lerne und nicht nur die Reihenfolge auswendig kann.
 - [ ] Als Benutzer möchte ich in der Wortliste nach einem Wort suchen können, damit ich bei vielen Vokabeln ein bestimmtes Wort schnell finde und bearbeiten kann.

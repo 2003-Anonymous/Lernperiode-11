@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Linq;
 using VokabelTrainer.Services;
 
 namespace VokabelTrainer.Models;
@@ -6,6 +7,10 @@ namespace VokabelTrainer.Models;
 public static class WordList
 {
     public static ObservableCollection<Word> Words { get; } = [];
+
+    public static int KnownCount => Words.Count(word => word.IsKnown);
+
+    public static int UnknownCount => Words.Count(word => !word.IsKnown);
 
     public static void Load()
     {
@@ -21,7 +26,7 @@ public static class WordList
     public static Word Add(string german, string foreignLanguage)
     {
         var id = WordDatabase.Insert(german, foreignLanguage);
-        var word = new Word(id, german, foreignLanguage);
+        var word = new Word(id, german, foreignLanguage, false);
         Words.Add(word);
         return word;
     }
@@ -31,6 +36,12 @@ public static class WordList
         word.German = german;
         word.ForeignLanguage = foreignLanguage;
         WordDatabase.Update(word);
+    }
+
+    public static void SetKnown(Word word, bool isKnown)
+    {
+        word.IsKnown = isKnown;
+        WordDatabase.UpdateIsKnown(word);
     }
 
     public static void Remove(Word word)

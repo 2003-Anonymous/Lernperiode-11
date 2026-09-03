@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using VokabelTrainer.Models;
 
@@ -16,8 +17,22 @@ public partial class MainViewModel : ViewModelBase
     }
 
     public void ShowStart() => CurrentPage = new StartViewModel(this);
-    public void ShowLearn() => CurrentPage = new LearnViewModel(this);
     public void ShowWordList() => CurrentPage = new WordListViewModel(this);
+
+    public void ShowLearn(bool onlyUnknown)
+    {
+        List<Word> words = onlyUnknown
+            ? [.. WordList.Words.Where(word => !word.IsKnown)]
+            : [.. WordList.Words];
+
+        if (words.Count == 0)
+        {
+            ShowResult([], []);
+            return;
+        }
+
+        CurrentPage = new LearnViewModel(this, words);
+    }
 
     // Die Lernseite reicht ihre Ergebnisse hier durch an die Ergebnisseite.
     public void ShowResult(List<Word> known, List<Word> unknown)

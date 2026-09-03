@@ -9,7 +9,7 @@ public partial class LearnViewModel : ViewModelBase
 {
     private readonly MainViewModel _main;
 
-    private readonly List<Word> _words = [.. WordList.Words];
+    private readonly List<Word> _words;
 
     private int _index;
 
@@ -22,12 +22,16 @@ public partial class LearnViewModel : ViewModelBase
     [ObservableProperty]
     public partial bool AnswerVisible { get; set; }
 
+    [ObservableProperty]
+    public partial string ProgressText { get; set; } = "";
+
     public List<Word> KnownWords { get; } = [];
     public List<Word> UnknownWords { get; } = [];
 
-    public LearnViewModel(MainViewModel main)
+    public LearnViewModel(MainViewModel main, List<Word> words)
     {
         _main = main;
+        _words = words;
         ShowWord();
     }
 
@@ -42,6 +46,7 @@ public partial class LearnViewModel : ViewModelBase
 
         Question = _words[_index].German;
         Answer = _words[_index].ForeignLanguage;
+        ProgressText = $"{_index + 1} von {_words.Count}";
         AnswerVisible = false;
     }
 
@@ -58,14 +63,18 @@ public partial class LearnViewModel : ViewModelBase
     [RelayCommand]
     private void Known()
     {
-        KnownWords.Add(_words[_index]);
+        var word = _words[_index];
+        WordList.SetKnown(word, true);
+        KnownWords.Add(word);
         Next();
     }
 
     [RelayCommand]
     private void NotKnown()
     {
-        UnknownWords.Add(_words[_index]);
+        var word = _words[_index];
+        WordList.SetKnown(word, false);
+        UnknownWords.Add(word);
         Next();
     }
 }

@@ -41,10 +41,13 @@ public static class WordDatabase
             CREATE TABLE IF NOT EXISTS Words (
                 Id              INTEGER PRIMARY KEY AUTOINCREMENT,
                 German          TEXT NOT NULL,
-                ForeignLanguage TEXT NOT NULL
+                ForeignLanguage TEXT NOT NULL,
+                IsKnown         INTEGER NOT NULL DEFAULT 0
             );
             """;
         create.ExecuteNonQuery();
+
+        AddIsKnownColumnIfMissing(connection);
 
         using var count = connection.CreateCommand();
         count.CommandText = "SELECT COUNT(*) FROM Words;";
@@ -53,6 +56,21 @@ public static class WordDatabase
         {
             SeedDefaultWords(connection);
         }
+    }
+
+    private static void AddIsKnownColumnIfMissing(SqliteConnection connection)
+    {
+        using var columns = connection.CreateCommand();
+        columns.CommandText = "SELECT COUNT(*) FROM pragma_table_info('Words') WHERE name = 'IsKnown';";
+
+        if (Convert.ToInt64(columns.ExecuteScalar()) > 0)
+        {
+            return;
+        }
+
+        using var alter = connection.CreateCommand();
+        alter.CommandText = "ALTER TABLE Words ADD COLUMN IsKnown INTEGER NOT NULL DEFAULT 0;";
+        alter.ExecuteNonQuery();
     }
 
     private static void SeedDefaultWords(SqliteConnection connection)
@@ -86,14 +104,18 @@ public static class WordDatabase
         using var connection = OpenConnection();
 
         using var select = connection.CreateCommand();
-        select.CommandText = "SELECT Id, German, ForeignLanguage FROM Words ORDER BY Id;";
+        select.CommandText = "SELECT Id, German, ForeignLanguage, IsKnown FROM Words ORDER BY Id;";
 
         var words = new List<Word>();
 
         using var reader = select.ExecuteReader();
         while (reader.Read())
         {
-            words.Add(new Word(reader.GetInt32(0), reader.GetString(1), reader.GetString(2)));
+            words.Add(new Word(
+                reader.GetInt32(0),
+                reader.GetString(1),
+                reader.GetString(2),
+                reader.GetBoolean(3)));
         }
 
         return words;
@@ -105,7 +127,7 @@ public static class WordDatabase
 
         using var insert = connection.CreateCommand();
         insert.CommandText =
-            "INSERT INTO Words (German, ForeignLanguage) VALUES ($german, $foreign); SELECT last_insert_rowid();";
+            "INSERT INTO Words (German, ForeignLanguage, IsKnown) VALUES ($german, $foreign, 0); SELECT last_insert_rowid();";
         insert.Parameters.AddWithValue("$german", german);
         insert.Parameters.AddWithValue("$foreign", foreignLanguage);
 
@@ -117,9 +139,22 @@ public static class WordDatabase
         using var connection = OpenConnection();
 
         using var update = connection.CreateCommand();
-        update.CommandText = "UPDATE Words SET German = $german, ForeignLanguage = $foreign WHERE Id = $id;";
+        update.CommandText =
+            "UPDATE Words SET German = $german, ForeignLanguage = $foreign, IsKnown = $known WHERE Id = $id;";
         update.Parameters.AddWithValue("$german", word.German);
         update.Parameters.AddWithValue("$foreign", word.ForeignLanguage);
+        update.Parameters.AddWithValue("$known", word.IsKnown);
+        update.Parameters.AddWithValue("$id", word.Id);
+        update.ExecuteNonQuery();
+    }
+
+    public static void UpdateIsKnown(Word word)
+    {
+        using var connection = OpenConnection();
+
+        using var update = connection.CreateCommand();
+        update.CommandText = "UPDATE Words SET IsKnown = $known WHERE Id = $id;";
+        update.Parameters.AddWithValue("$known", word.IsKnown);
         update.Parameters.AddWithValue("$id", word.Id);
         update.ExecuteNonQuery();
     }
