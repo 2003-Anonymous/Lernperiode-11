@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -31,7 +32,18 @@ public partial class MainViewModel : ViewModelBase
             return;
         }
 
+        Shuffle(words);
+
         CurrentPage = new LearnViewModel(this, words);
+    }
+
+    private static void Shuffle(List<Word> words)
+    {
+        for (var i = words.Count - 1; i > 0; i--)
+        {
+            var j = Random.Shared.Next(i + 1);
+            (words[i], words[j]) = (words[j], words[i]);
+        }
     }
 
     // Die Lernseite reicht ihre Ergebnisse hier durch an die Ergebnisseite.

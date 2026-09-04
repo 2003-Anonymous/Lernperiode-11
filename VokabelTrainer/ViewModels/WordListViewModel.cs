@@ -1,5 +1,7 @@
+using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using VokabelTrainer.Models;
@@ -10,9 +12,13 @@ public partial class WordListViewModel : ViewModelBase
 {
     private readonly MainViewModel _main;
 
-    public ObservableCollection<Word> Words => WordList.Words;
+    public ObservableCollection<Word> FilteredWords { get; } = [];
 
-    public string CountText => $"{Words.Count} Wörter - {WordList.UnknownCount} offen, {WordList.KnownCount} gewusst";
+    public string CountText =>
+        $"{FilteredWords.Count} von {WordList.Words.Count} Wörtern - {WordList.UnknownCount} offen, {WordList.KnownCount} gewusst";
+
+    [ObservableProperty]
+    public partial string SearchText { get; set; } = "";
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(SaveCommand))]
@@ -35,20 +41,41 @@ public partial class WordListViewModel : ViewModelBase
     public WordListViewModel(MainViewModel main)
     {
         _main = main;
-        Words.CollectionChanged += OnWordsChanged;
+        WordList.Words.CollectionChanged += OnWordsChanged;
+        ApplyFilter();
     }
 
-    private void OnWordsChanged(object? sender, NotifyCollectionChangedEventArgs e)
-        => OnPropertyChanged(nameof(CountText));
+    private void OnWordsChanged(object? sender, NotifyCollectionChangedEventArgs e) => ApplyFilter();
+
+    partial void OnSearchTextChanged(string value) => ApplyFilter();
+
+    private void ApplyFilter()
+    {
+        var search = SearchText.Trim();
+
+        var matches = string.IsNullOrEmpty(search)
+            ? WordList.Words
+            : WordList.Words.Where(word =>
+                word.German.Contains(search, StringComparison.CurrentCultureIgnoreCase) ||
+                word.ForeignLanguage.Contains(search, StringComparison.CurrentCultureIgnoreCase));
+
+        FilteredWords.Clear();
+        foreach (var word in matches)
+        {
+            FilteredWords.Add(word);
+        }
+
+        OnPropertyChanged(nameof(CountText));
+    }
+
+    private bool CanSave()
+        => !string.IsNullOrWhiteSpace(GermanInput) && !string.IsNullOrWhiteSpace(ForeignInput);
 
     partial void OnSelectedWordChanged(Word? value)
     {
         GermanInput = value?.German ?? "";
         ForeignInput = value?.ForeignLanguage ?? "";
     }
-
-    private bool CanSave()
-        => !string.IsNullOrWhiteSpace(GermanInput) && !string.IsNullOrWhiteSpace(ForeignInput);
 
     [RelayCommand(CanExecute = nameof(CanSave))]
     private void Save()
@@ -59,6 +86,7 @@ public partial class WordListViewModel : ViewModelBase
         if (SelectedWord is { } word)
         {
             WordList.Update(word, german, foreignLanguage);
+            ApplyFilter();
         }
         else
         {
@@ -81,15 +109,15 @@ public partial class WordListViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void Edit(Word word) => SelectedWord = word;
-
-    [RelayCommand]
     private void NewWord()
     {
         SelectedWord = null;
         GermanInput = "";
         ForeignInput = "";
     }
+
+    [RelayCommand]
+    private void ClearSearch() => SearchText = "";
 
     [RelayCommand]
     private void Start() => _main.ShowLearn(false);

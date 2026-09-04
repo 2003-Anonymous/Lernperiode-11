@@ -8,7 +8,7 @@
              x:Class="VokabelTrainer.Views.WordListView"
              x:DataType="vm:WordListViewModel">
 
-    <Grid RowDefinitions="Auto,Auto,*,Auto,Auto" Margin="20,20,20,20">
+    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto,Auto" Margin="20,20,20,20">
 
         <TextBlock Grid.Row="0"
                    Text="Wortliste"
@@ -22,8 +22,18 @@
                    Margin="0,4,0,12"
                    HorizontalAlignment="Center" />
 
-        <ListBox Grid.Row="2"
-                 ItemsSource="{Binding Words}"
+        <Grid Grid.Row="2" ColumnDefinitions="*,Auto" Margin="0,0,0,8">
+            <TextBox Grid.Column="0"
+                     Text="{Binding SearchText}"
+                     PlaceholderText="Suchen..." />
+            <Button Grid.Column="1"
+                    Content="X"
+                    Command="{Binding ClearSearchCommand}"
+                    Margin="6,0,0,0" />
+        </Grid>
+
+        <ListBox Grid.Row="3"
+                 ItemsSource="{Binding FilteredWords}"
                  SelectedItem="{Binding SelectedWord}">
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="models:Word">
@@ -48,7 +58,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <StackPanel Grid.Row="3" Spacing="6" Margin="0,16,0,0">
+        <StackPanel Grid.Row="4" Spacing="6" Margin="0,16,0,0">
             <TextBlock Text="{Binding EditorTitle}"
                        FontSize="18" />
             <TextBox Text="{Binding GermanInput}"
@@ -77,7 +87,7 @@
             </Grid>
         </StackPanel>
 
-        <StackPanel Grid.Row="4" Spacing="10" Margin="0,16,0,0">
+        <StackPanel Grid.Row="5" Spacing="10" Margin="0,16,0,0">
             <Button Content="Abfrage starten"
                     Command="{Binding StartCommand}"
                     HorizontalAlignment="Center"

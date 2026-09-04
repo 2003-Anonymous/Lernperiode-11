@@ -35,5 +35,15 @@ Heute habe ich programmiert, dass ich von der Homeseite aus die Wörterliste ans
 ## 4.9
 
 - [x] Als Benutzer möchte ich gelernte Wörter als "gelernt" markieren können, damit ich beim Üben nur noch die Wörter sehe, die ich noch nicht kann.
-- [ ] Als Benutzer möchte ich die Wörter in zufälliger Reihenfolge abgefragt bekommen, damit ich die Übersetzungen wirklich lerne und nicht nur die Reihenfolge auswendig kann.
-- [ ] Als Benutzer möchte ich in der Wortliste nach einem Wort suchen können, damit ich bei vielen Vokabeln ein bestimmtes Wort schnell finde und bearbeiten kann.
+- [x] Als Benutzer möchte ich die Wörter in zufälliger Reihenfolge abgefragt bekommen, damit ich die Übersetzungen wirklich lerne und nicht nur die Reihenfolge auswendig kann.
+- [x] Als Benutzer möchte ich in der Wortliste nach einem Wort suchen können, damit ich bei vielen Vokabeln ein bestimmtes Wort schnell finde und bearbeiten kann.
+
+Heute habe ich die Wortliste bearbeitbar gemacht: Wörter lassen sich hinzufügen, ändern und löschen. Alle Wörter werden jetzt in einer SQLite-Datenbank gespeichert, sodass sie nach dem Schliessen der App noch vorhanden sind. Ausserdem merkt sich die App, welche Wörter ich schon gewusst habe. Beim Lernen kann ich wählen, ob ich nur die offenen oder alle Wörter üben will, und ein gewusstes Wort wird wieder zu einem offenen, sobald ich es beim Lernen als "Nicht gewusst" markiere. Zum Schluss habe ich noch eingebaut, dass die Wörter in zufälliger Reihenfolge abgefragt werden und dass ich in der Wortliste nach einem Wort suchen kann. Am meisten Zeit hat mich die Datenbank gekostet, weil ich zuerst herausfinden musste, wie ich SQLite in Avalonia einbinde und wo die Datenbankdatei überhaupt gespeichert werden soll.
+
+## 11.9
+
+- [ ] Als Benutzer möchte ich mehrere Sprachen anlegen können, damit ich in derselben App zum Beispiel Polnisch und Französisch getrennt voneinander lernen kann.
+- [ ] Als Benutzer möchte ich innerhalb einer Sprache eigene Sammlungen wie "Tiere" oder "Zahlen" erstellen können, damit ich gezielt ein einzelnes Thema üben kann.
+- [ ] Als Benutzer möchte ich eine Sammlung auswählen und nur deren Wörter abgefragt bekommen, damit ich nicht immer alle Wörter einer Sprache durchgehen muss.
+
+
