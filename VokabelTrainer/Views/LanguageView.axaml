@@ -1,0 +1,70 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:VokabelTrainer.ViewModels"
+             xmlns:models="using:VokabelTrainer.Models"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="320" d:DesignHeight="660"
+             x:Class="VokabelTrainer.Views.LanguageView"
+             x:DataType="vm:LanguageViewModel">
+
+    <Grid RowDefinitions="Auto,Auto,*,Auto,Auto" Margin="20,20,20,20">
+
+        <TextBlock Grid.Row="0"
+                   Text="Sprachen"
+                   FontSize="32"
+                   HorizontalAlignment="Center" />
+
+        <TextBlock Grid.Row="1"
+                   Text="{Binding SelectionInfo}"
+                   FontSize="16"
+                   Foreground="Gray"
+                   Margin="0,4,0,12"
+                   HorizontalAlignment="Center" />
+
+        <ListBox Grid.Row="2"
+                 ItemsSource="{Binding Languages}"
+                 SelectedItem="{Binding SelectedLanguage}">
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="models:Language">
+                    <TextBlock Text="{Binding Name}" FontSize="20" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel Grid.Row="3" Spacing="6" Margin="0,16,0,0">
+            <TextBox Text="{Binding NameInput}"
+                     PlaceholderText="Sprache, z.B. Französisch" />
+            <Grid ColumnDefinitions="*,*,*">
+                <Button Grid.Column="0"
+                        Content="Hinzufügen"
+                        Command="{Binding AddCommand}"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Center"
+                        Margin="0,0,4,0" />
+                <Button Grid.Column="1"
+                        Content="Umbenennen"
+                        Command="{Binding RenameCommand}"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Center"
+                        Margin="2,0,2,0" />
+                <Button Grid.Column="2"
+                        Content="Löschen"
+                        Command="{Binding DeleteCommand}"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Center"
+                        Margin="4,0,0,0" />
+            </Grid>
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Spacing="10" Margin="0,16,0,0">
+            <Button Content="Diese Sprache lernen"
+                    Command="{Binding UseCommand}"
+                    HorizontalAlignment="Center"
+                    Padding="20,10" />
+            <Button Content="Zurück"
+                    Command="{Binding ReturnHomeCommand}"
+                    HorizontalAlignment="Center" />
+        </StackPanel>
+    </Grid>
+</UserControl>

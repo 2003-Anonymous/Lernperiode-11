@@ -30,7 +30,7 @@ Heute habe ich eine kurze Wortliste als Beispiel erstellt, welche in der App dar
 - [x] Als Benutzer möchte ich in dieser Ansicht Wörter hinzufügen, bearbeiten und löschen können, damit ich die Liste an meinen aktuellen Lernstoff anpassen kann.
 - [x] Als Benutzer möchte ich, dass meine Wörter dauerhaft in einer Datenbank gespeichert werden, damit sie nach dem Schliessen der App noch vorhanden sind.
 
-Heute habe ich programmiert, dass ich von der Homeseite aus die Wörterliste ansehen und auch gleich üben kann. So kann man die Wörter vor dem Abfragen nochmals lernen. Um eine bessere Darstellung von der App zu haben, habe ich noch die Grösse des Fensters auf meine Handygrösse angepasst. So kann ich mir die App besser vorstellen. Zudem habe ich hinzugefügt, dass wenn man diese Liste öffnet, man neue Wörter hinzufügen kann. Bereits vorhandene Wörter kann man bearbeiten oder auch löschen. Die Wörter werden in einer SQLight-Datenbank gespeichert.
+Heute habe ich programmiert, dass ich von der Homeseite aus die Wörterliste ansehen und auch gleich üben kann. So kann man die Wörter vor dem Abfragen nochmals lernen. Um eine bessere Darstellung von der App zu haben, habe ich noch die Grösse des Fensters auf meine Handygrösse angepasst. So kann ich mir die App besser vorstellen. Zudem habe ich hinzugefügt, dass wenn man diese Liste öffnet, man neue Wörter hinzufügen kann. Bereits vorhandene Wörter kann man bearbeiten oder auch löschen. Die Wörter werden in einer SQLite-Datenbank gespeichert.
 
 ## 4.9
 
@@ -42,8 +42,8 @@ Heute habe ich die Wortliste bearbeitbar gemacht: Wörter lassen sich hinzufüge
 
 ## 11.9
 
-- [ ] Als Benutzer möchte ich mehrere Sprachen anlegen können, damit ich in derselben App zum Beispiel Polnisch und Französisch getrennt voneinander lernen kann.
+- [x] Als Benutzer möchte ich mehrere Sprachen anlegen können, damit ich in derselben App zum Beispiel Polnisch und Französisch getrennt voneinander lernen kann.
 - [ ] Als Benutzer möchte ich innerhalb einer Sprache eigene Sammlungen wie "Tiere" oder "Zahlen" erstellen können, damit ich gezielt ein einzelnes Thema üben kann.
 - [ ] Als Benutzer möchte ich eine Sammlung auswählen und nur deren Wörter abgefragt bekommen, damit ich nicht immer alle Wörter einer Sprache durchgehen muss.
 
-
+Heute habe ich eingebaut, dass ich mehrere Sprachen anlegen kann. Dafür gibt es in der Datenbank eine neue Tabelle "Languages", und jedes Wort gehört über eine LanguageId zu einer Sprache. Auf der Startseite kann ich die Sprache in einem Auswahlfeld wechseln, und die Auswahl wird gespeichert, sodass beim nächsten Start wieder dieselbe Sprache aktiv ist. Über den Knopf "Sprachen verwalten" komme ich auf eine neue Seite, wo ich Sprachen hinzufügen, umbenennen und löschen kann. Die Wortliste und die Abfrage zeigen immer nur die Wörter der gewählten Sprache. Etwas knifflig war, dass meine Datenbank ja schon Wörter enthielt. Diese werden beim Start automatisch der Sprache "Polnisch" zugeordnet, damit nichts verloren geht.

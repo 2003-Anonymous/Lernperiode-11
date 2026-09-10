@@ -19,6 +19,7 @@ public partial class MainViewModel : ViewModelBase
 
     public void ShowStart() => CurrentPage = new StartViewModel(this);
     public void ShowWordList() => CurrentPage = new WordListViewModel(this);
+    public void ShowLanguages() => CurrentPage = new LanguageViewModel(this);
 
     public void ShowLearn(bool onlyUnknown)
     {

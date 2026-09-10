@@ -1,6 +1,7 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="using:VokabelTrainer.ViewModels"
+             xmlns:models="using:VokabelTrainer.Models"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="320" d:DesignHeight="660"
@@ -11,10 +12,23 @@
         <TextBlock Text="Vokabeltrainer"
                    FontSize="32"
                    HorizontalAlignment="Center" />
+
+        <ComboBox ItemsSource="{Binding Languages}"
+                  SelectedItem="{Binding SelectedLanguage}"
+                  HorizontalAlignment="Center"
+                  MinWidth="200">
+            <ComboBox.ItemTemplate>
+                <DataTemplate DataType="models:Language">
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
         <TextBlock Text="{Binding StatusText}"
                    FontSize="16"
                    Foreground="Gray"
                    HorizontalAlignment="Center" />
+
         <Button Content="Offene Wörter lernen"
                 Command="{Binding LearnUnknownCommand}"
                 HorizontalAlignment="Center"
@@ -25,6 +39,10 @@
                 Padding="20,10" />
         <Button Content="Wortliste ansehen"
                 Command="{Binding ShowWordListCommand}"
+                HorizontalAlignment="Center"
+                Padding="20,10" />
+        <Button Content="Sprachen verwalten"
+                Command="{Binding ShowLanguagesCommand}"
                 HorizontalAlignment="Center"
                 Padding="20,10" />
     </StackPanel>

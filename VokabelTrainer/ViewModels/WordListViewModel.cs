@@ -14,6 +14,8 @@ public partial class WordListViewModel : ViewModelBase
 
     public ObservableCollection<Word> FilteredWords { get; } = [];
 
+    public string LanguageName => WordList.CurrentLanguage?.Name ?? "Keine Sprache";
+
     public string CountText =>
         $"{FilteredWords.Count} von {WordList.Words.Count} Wörtern - {WordList.UnknownCount} offen, {WordList.KnownCount} gewusst";
 
@@ -69,7 +71,9 @@ public partial class WordListViewModel : ViewModelBase
     }
 
     private bool CanSave()
-        => !string.IsNullOrWhiteSpace(GermanInput) && !string.IsNullOrWhiteSpace(ForeignInput);
+        => WordList.CurrentLanguage is not null
+           && !string.IsNullOrWhiteSpace(GermanInput)
+           && !string.IsNullOrWhiteSpace(ForeignInput);
 
     partial void OnSelectedWordChanged(Word? value)
     {
