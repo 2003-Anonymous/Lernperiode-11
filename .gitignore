@@ -47,3 +47,6 @@ publish/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Persoenliche Notizen, nicht ins Repo
+Code-Erklaerung.md

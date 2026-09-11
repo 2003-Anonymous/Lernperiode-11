@@ -1,0 +1,289 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Styles.Resources>
+        <SolidColorBrush x:Key="AppBackground" Color="#0C110E" />
+        <SolidColorBrush x:Key="AppSurface" Color="#141C17" />
+        <SolidColorBrush x:Key="AppSurfaceHigh" Color="#1B2620" />
+        <SolidColorBrush x:Key="AppBorder" Color="#25352C" />
+        <SolidColorBrush x:Key="AppAccent" Color="#3ECF8E" />
+        <SolidColorBrush x:Key="AppAccentHover" Color="#4FE09E" />
+        <SolidColorBrush x:Key="AppAccentPressed" Color="#2FB87A" />
+        <SolidColorBrush x:Key="AppAccentSoft" Color="#173A2A" />
+        <SolidColorBrush x:Key="AppText" Color="#E8F1EB" />
+        <SolidColorBrush x:Key="AppTextMuted" Color="#8C9E93" />
+        <SolidColorBrush x:Key="AppTextFaint" Color="#63756A" />
+        <SolidColorBrush x:Key="AppDanger" Color="#E0736B" />
+        <SolidColorBrush x:Key="AppOnAccent" Color="#07130B" />
+
+        <StreamGeometry x:Key="IconAdd">M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z</StreamGeometry>
+        <StreamGeometry x:Key="IconEdit">M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z</StreamGeometry>
+        <StreamGeometry x:Key="IconDelete">M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z</StreamGeometry>
+        <StreamGeometry x:Key="IconClose">M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z</StreamGeometry>
+        <StreamGeometry x:Key="IconBack">M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z</StreamGeometry>
+        <StreamGeometry x:Key="IconPlay">M8 5v14l11-7z</StreamGeometry>
+        <StreamGeometry x:Key="IconList">M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z</StreamGeometry>
+        <StreamGeometry x:Key="IconFolder">M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z</StreamGeometry>
+        <StreamGeometry x:Key="IconLanguage">M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z</StreamGeometry>
+    </Styles.Resources>
+
+    <Style Selector="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource AppText}" />
+    </Style>
+
+    <Style Selector="TextBlock.title">
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+
+    <Style Selector="TextBlock.heading">
+        <Setter Property="FontSize" Value="17" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+
+    <Style Selector="TextBlock.label">
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="{StaticResource AppTextFaint}" />
+    </Style>
+
+    <Style Selector="TextBlock.muted">
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Foreground" Value="{StaticResource AppTextMuted}" />
+    </Style>
+
+    <Style Selector="TextBlock.stat">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+
+    <Style Selector="TextBlock.accent">
+        <Setter Property="Foreground" Value="{StaticResource AppAccent}" />
+    </Style>
+
+    <Style Selector="Border.card">
+        <Setter Property="Background" Value="{StaticResource AppSurface}" />
+        <Setter Property="BorderBrush" Value="{StaticResource AppBorder}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="14" />
+        <Setter Property="Padding" Value="16" />
+    </Style>
+
+    <Style Selector="Button">
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Padding" Value="16,11" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+
+    <Style Selector="Button.primary">
+        <Setter Property="Foreground" Value="{StaticResource AppOnAccent}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="Button.primary /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource AppAccent}" />
+        <Setter Property="CornerRadius" Value="10" />
+    </Style>
+    <Style Selector="Button.primary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource AppAccentHover}" />
+        <Setter Property="TextElement.Foreground" Value="{StaticResource AppOnAccent}" />
+    </Style>
+    <Style Selector="Button.primary:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource AppAccentPressed}" />
+        <Setter Property="TextElement.Foreground" Value="{StaticResource AppOnAccent}" />
+    </Style>
+    <Style Selector="Button.primary:disabled /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource AppSurfaceHigh}" />
+        <Setter Property="TextElement.Foreground" Value="{StaticResource AppTextFaint}" />
+    </Style>
+
+    <Style Selector="Button.outline">
+        <Setter Property="Foreground" Value="{StaticResource AppText}" />
+    </Style>
+    <Style Selector="Button.outline /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{StaticResource AppBorder}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="10" />
+    </Style>
+    <Style Selector="Button.outline:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource AppSurfaceHigh}" />
+        <Setter Property="BorderBrush" Value="{StaticResource AppAccent}" />
+        <Setter Property="TextElement.Foreground" Value="{StaticResource AppText}" />
+    </Style>
+    <Style Selector="Button.outline:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource AppSurface}" />
+        <Setter Property="TextElement.Foreground" Value="{StaticResource AppText}" />
+    </Style>
+    <Style Selector="Button.outline:disabled /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{StaticResource AppBorder}" />
+        <Setter Property="TextElement.Foreground" Value="{StaticResource AppTextFaint}" />
+    </Style>
+
+    <Style Selector="Button.ghost">
+        <Setter Property="Foreground" Value="{StaticResource AppTextMuted}" />
+        <Setter Property="Padding" Value="10,8" />
+        <Setter Property="FontSize" Value="13" />
+    </Style>
+    <Style Selector="Button.ghost /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="CornerRadius" Value="8" />
+    </Style>
+    <Style Selector="Button.ghost:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource AppSurfaceHigh}" />
+        <Setter Property="TextElement.Foreground" Value="{StaticResource AppText}" />
+    </Style>
+    <Style Selector="Button.ghost:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource AppSurface}" />
+        <Setter Property="TextElement.Foreground" Value="{StaticResource AppText}" />
+    </Style>
+    <Style Selector="Button.ghost:disabled /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="TextElement.Foreground" Value="{StaticResource AppTextFaint}" />
+    </Style>
+
+    <Style Selector="Button.danger">
+        <Setter Property="Foreground" Value="{StaticResource AppDanger}" />
+    </Style>
+    <Style Selector="Button.danger /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{StaticResource AppBorder}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="10" />
+    </Style>
+    <Style Selector="Button.danger:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="#2A1A1A" />
+        <Setter Property="BorderBrush" Value="{StaticResource AppDanger}" />
+        <Setter Property="TextElement.Foreground" Value="{StaticResource AppDanger}" />
+    </Style>
+    <Style Selector="Button.danger:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="#1F1414" />
+        <Setter Property="TextElement.Foreground" Value="{StaticResource AppDanger}" />
+    </Style>
+    <Style Selector="Button.danger:disabled /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{StaticResource AppBorder}" />
+        <Setter Property="TextElement.Foreground" Value="{StaticResource AppTextFaint}" />
+    </Style>
+
+    <Style Selector="Button.card">
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+    </Style>
+    <Style Selector="Button.card /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource AppSurface}" />
+        <Setter Property="BorderBrush" Value="{StaticResource AppBorder}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="14" />
+    </Style>
+    <Style Selector="Button.card:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource AppSurfaceHigh}" />
+        <Setter Property="BorderBrush" Value="{StaticResource AppAccent}" />
+    </Style>
+    <Style Selector="Button.card:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{StaticResource AppSurface}" />
+    </Style>
+
+    <Style Selector="Button.icon">
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="MinWidth" Value="0" />
+    </Style>
+
+    <Style Selector="Button.primary PathIcon">
+        <Setter Property="Foreground" Value="{StaticResource AppOnAccent}" />
+    </Style>
+    <Style Selector="Button.outline PathIcon">
+        <Setter Property="Foreground" Value="{StaticResource AppText}" />
+    </Style>
+    <Style Selector="Button.danger PathIcon">
+        <Setter Property="Foreground" Value="{StaticResource AppDanger}" />
+    </Style>
+    <Style Selector="Button.ghost PathIcon">
+        <Setter Property="Foreground" Value="{StaticResource AppTextMuted}" />
+    </Style>
+    <Style Selector="Button:disabled PathIcon">
+        <Setter Property="Foreground" Value="{StaticResource AppTextFaint}" />
+    </Style>
+
+    <Style Selector="TextBox">
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Padding" Value="12,10" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Foreground" Value="{StaticResource AppText}" />
+        <Setter Property="CaretBrush" Value="{StaticResource AppAccent}" />
+    </Style>
+    <Style Selector="TextBox /template/ Border#PART_BorderElement">
+        <Setter Property="Background" Value="{StaticResource AppSurfaceHigh}" />
+        <Setter Property="BorderBrush" Value="{StaticResource AppBorder}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="10" />
+    </Style>
+    <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
+        <Setter Property="Background" Value="{StaticResource AppSurfaceHigh}" />
+        <Setter Property="BorderBrush" Value="{StaticResource AppBorder}" />
+    </Style>
+    <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+        <Setter Property="Background" Value="{StaticResource AppSurfaceHigh}" />
+        <Setter Property="BorderBrush" Value="{StaticResource AppAccent}" />
+    </Style>
+
+    <Style Selector="ComboBox">
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Padding" Value="12,9" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Foreground" Value="{StaticResource AppText}" />
+    </Style>
+    <Style Selector="ComboBox /template/ Border#Background">
+        <Setter Property="Background" Value="{StaticResource AppSurfaceHigh}" />
+        <Setter Property="BorderBrush" Value="{StaticResource AppBorder}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="10" />
+    </Style>
+    <Style Selector="ComboBox:pointerover /template/ Border#Background">
+        <Setter Property="BorderBrush" Value="{StaticResource AppAccent}" />
+    </Style>
+    <Style Selector="ComboBox:focus /template/ Border#Background">
+        <Setter Property="BorderBrush" Value="{StaticResource AppAccent}" />
+    </Style>
+
+    <Style Selector="ListBox">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Padding" Value="0" />
+    </Style>
+
+    <Style Selector="ListBoxItem">
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Margin" Value="0,0,0,6" />
+        <Setter Property="MinHeight" Value="0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource AppText}" />
+    </Style>
+
+    <Style Selector="Border.row">
+        <Setter Property="Background" Value="{StaticResource AppSurface}" />
+        <Setter Property="BorderBrush" Value="{StaticResource AppBorder}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Padding" Value="12,9" />
+    </Style>
+    <Style Selector="Border.row.selected">
+        <Setter Property="Background" Value="{StaticResource AppSurfaceHigh}" />
+        <Setter Property="BorderBrush" Value="{StaticResource AppAccent}" />
+    </Style>
+
+    <Style Selector="ProgressBar">
+        <Setter Property="Height" Value="6" />
+        <Setter Property="CornerRadius" Value="3" />
+        <Setter Property="Foreground" Value="{StaticResource AppAccent}" />
+        <Setter Property="Background" Value="{StaticResource AppSurfaceHigh}" />
+    </Style>
+
+    <Style Selector="ScrollViewer">
+        <Setter Property="Background" Value="Transparent" />
+    </Style>
+
+</Styles>

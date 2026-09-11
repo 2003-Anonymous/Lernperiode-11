@@ -8,7 +8,6 @@ public partial class ResultViewModel : ViewModelBase
 {
     private readonly MainViewModel _main;
 
-    // Kommen fertig von der Lernseite herein - dieses ViewModel rechnet nur noch aus.
     public List<Word> KnownWords { get; }
     public List<Word> UnknownWords { get; }
 

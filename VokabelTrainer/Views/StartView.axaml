@@ -4,46 +4,116 @@
              xmlns:models="using:VokabelTrainer.Models"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="320" d:DesignHeight="660"
+             mc:Ignorable="d" d:DesignWidth="340" d:DesignHeight="640"
              x:Class="VokabelTrainer.Views.StartView"
              x:DataType="vm:StartViewModel">
 
-    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="20">
-        <TextBlock Text="Vokabeltrainer"
-                   FontSize="32"
-                   HorizontalAlignment="Center" />
+    <Grid RowDefinitions="Auto,Auto,*,Auto" Margin="20,24,20,20">
 
-        <ComboBox ItemsSource="{Binding Languages}"
-                  SelectedItem="{Binding SelectedLanguage}"
-                  HorizontalAlignment="Center"
-                  MinWidth="200">
-            <ComboBox.ItemTemplate>
-                <DataTemplate DataType="models:Language">
-                    <TextBlock Text="{Binding Name}" />
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
+        <StackPanel Grid.Row="0" Spacing="2" Margin="0,0,0,20">
+            <TextBlock Text="Vokabeltrainer" Classes="title" />
+            <TextBlock Text="{Binding StatusText}" Classes="muted" />
+        </StackPanel>
 
-        <TextBlock Text="{Binding StatusText}"
-                   FontSize="16"
-                   Foreground="Gray"
-                   HorizontalAlignment="Center" />
+        <Border Grid.Row="1" Classes="card">
+            <StackPanel Spacing="10">
+                <StackPanel Spacing="5">
+                    <TextBlock Text="SPRACHE" Classes="label" />
+                    <ComboBox ItemsSource="{Binding Languages}"
+                              SelectedItem="{Binding SelectedLanguage}"
+                              HorizontalAlignment="Stretch">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate DataType="models:Language">
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
 
-        <Button Content="Offene Wörter lernen"
-                Command="{Binding LearnUnknownCommand}"
-                HorizontalAlignment="Center"
-                Padding="20,10" />
-        <Button Content="Alle Wörter lernen"
-                Command="{Binding LearnAllCommand}"
-                HorizontalAlignment="Center"
-                Padding="20,10" />
-        <Button Content="Wortliste ansehen"
-                Command="{Binding ShowWordListCommand}"
-                HorizontalAlignment="Center"
-                Padding="20,10" />
-        <Button Content="Sprachen verwalten"
-                Command="{Binding ShowLanguagesCommand}"
-                HorizontalAlignment="Center"
-                Padding="20,10" />
-    </StackPanel>
+                <StackPanel Spacing="5">
+                    <TextBlock Text="SAMMLUNG" Classes="label" />
+                    <ComboBox ItemsSource="{Binding Collections}"
+                              SelectedItem="{Binding SelectedCollection}"
+                              HorizontalAlignment="Stretch">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate DataType="models:Collection">
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="2" Classes="card" VerticalAlignment="Center" Margin="0,16">
+            <StackPanel Spacing="14">
+                <Grid ColumnDefinitions="*,Auto,*">
+                    <StackPanel Grid.Column="0" Spacing="2">
+                        <TextBlock Text="{Binding UnknownCount}" Classes="stat" />
+                        <TextBlock Text="offen" Classes="muted" HorizontalAlignment="Center" />
+                    </StackPanel>
+
+                    <Rectangle Grid.Column="1"
+                               Width="1"
+                               Fill="{StaticResource AppBorder}"
+                               Margin="8,4" />
+
+                    <StackPanel Grid.Column="2" Spacing="2">
+                        <TextBlock Text="{Binding KnownCount}" Classes="stat accent" />
+                        <TextBlock Text="gewusst" Classes="muted" HorizontalAlignment="Center" />
+                    </StackPanel>
+                </Grid>
+
+                <ProgressBar Minimum="0"
+                             Maximum="{Binding TotalCount}"
+                             Value="{Binding KnownCount}"
+                             IsVisible="{Binding HasWords}" />
+            </StackPanel>
+        </Border>
+
+        <StackPanel Grid.Row="3" Spacing="8">
+            <Button Content="Offene Wörter lernen"
+                    Classes="primary"
+                    Command="{Binding LearnUnknownCommand}"
+                    HorizontalAlignment="Stretch" />
+
+            <Button Content="Alle Wörter lernen"
+                    Classes="outline"
+                    Command="{Binding LearnAllCommand}"
+                    HorizontalAlignment="Stretch" />
+
+            <Grid ColumnDefinitions="*,*,*" Margin="0,4,0,0">
+                <Button Grid.Column="0"
+                        Classes="ghost"
+                        Command="{Binding ShowWordListCommand}"
+                        HorizontalAlignment="Stretch"
+                        ToolTip.Tip="Wortliste bearbeiten">
+                    <StackPanel Spacing="4">
+                        <PathIcon Data="{StaticResource IconList}" Width="17" Height="17" />
+                        <TextBlock Text="Wörter" FontSize="11" HorizontalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+                <Button Grid.Column="1"
+                        Classes="ghost"
+                        Command="{Binding ShowLanguagesCommand}"
+                        HorizontalAlignment="Stretch"
+                        ToolTip.Tip="Sprachen verwalten">
+                    <StackPanel Spacing="4">
+                        <PathIcon Data="{StaticResource IconLanguage}" Width="17" Height="17" />
+                        <TextBlock Text="Sprachen" FontSize="11" HorizontalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+                <Button Grid.Column="2"
+                        Classes="ghost"
+                        Command="{Binding ShowCollectionsCommand}"
+                        HorizontalAlignment="Stretch"
+                        ToolTip.Tip="Sammlungen verwalten">
+                    <StackPanel Spacing="4">
+                        <PathIcon Data="{StaticResource IconFolder}" Width="17" Height="17" />
+                        <TextBlock Text="Sammlungen" FontSize="11" HorizontalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </StackPanel>
+    </Grid>
 </UserControl>

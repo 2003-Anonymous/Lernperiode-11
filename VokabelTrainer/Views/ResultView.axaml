@@ -3,42 +3,63 @@
              xmlns:vm="using:VokabelTrainer.ViewModels"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="320" d:DesignHeight="660"
+             mc:Ignorable="d" d:DesignWidth="340" d:DesignHeight="640"
              x:Class="VokabelTrainer.Views.ResultView"
              x:DataType="vm:ResultViewModel">
 
-    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="20">
+    <Grid RowDefinitions="Auto,*,Auto" Margin="20,24,20,20">
 
-        <TextBlock Text="Ergebnis"
-                   FontSize="32"
-                   HorizontalAlignment="Center" />
+        <TextBlock Grid.Row="0" Text="Ergebnis" Classes="title" />
 
-        <TextBlock Text="{Binding Summary}"
-                   FontSize="24"
-                   Foreground="Gray"
-                   HorizontalAlignment="Center" />
+        <Border Grid.Row="1" Classes="card" VerticalAlignment="Center" Margin="0,20">
+            <StackPanel Spacing="18">
+                <StackPanel Spacing="4">
+                    <TextBlock Text="{Binding KnownCount}"
+                               Classes="accent"
+                               FontSize="52"
+                               FontWeight="SemiBold"
+                               HorizontalAlignment="Center" />
+                    <TextBlock Text="{Binding Summary}"
+                               Classes="muted"
+                               HorizontalAlignment="Center"
+                               TextAlignment="Center" />
+                </StackPanel>
 
-        <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center"
-                    IsVisible="{Binding HasWords}">
-            <TextBlock Text="Gewusst:" FontSize="20" />
-            <TextBlock Text="{Binding KnownCount}" FontSize="20" />
+                <ProgressBar Minimum="0"
+                             Maximum="{Binding TotalCount}"
+                             Value="{Binding KnownCount}"
+                             IsVisible="{Binding HasWords}" />
+
+                <Grid ColumnDefinitions="*,Auto,*" IsVisible="{Binding HasWords}">
+                    <StackPanel Grid.Column="0" Spacing="2">
+                        <TextBlock Text="{Binding UnknownCount}" Classes="stat" />
+                        <TextBlock Text="noch offen" Classes="muted" HorizontalAlignment="Center" />
+                    </StackPanel>
+
+                    <Rectangle Grid.Column="1"
+                               Width="1"
+                               Fill="{StaticResource AppBorder}"
+                               Margin="8,4" />
+
+                    <StackPanel Grid.Column="2" Spacing="2">
+                        <TextBlock Text="{Binding TotalCount}" Classes="stat" />
+                        <TextBlock Text="abgefragt" Classes="muted" HorizontalAlignment="Center" />
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Border>
+
+        <StackPanel Grid.Row="2" Spacing="8">
+            <Button Content="Offene Wörter weiterlernen"
+                    Classes="primary"
+                    Command="{Binding LearnUnknownCommand}"
+                    IsVisible="{Binding CanLearnUnknown}"
+                    HorizontalAlignment="Stretch" />
+
+            <Button Content="Zur Startseite"
+                    Classes="outline"
+                    Command="{Binding ReturnHomeCommand}"
+                    HorizontalAlignment="Stretch" />
         </StackPanel>
-
-        <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center"
-                    IsVisible="{Binding HasWords}">
-            <TextBlock Text="Nicht gewusst:" FontSize="20" />
-            <TextBlock Text="{Binding UnknownCount}" FontSize="20" />
-        </StackPanel>
-
-        <Button Content="Offene Wörter weiterlernen"
-                Command="{Binding LearnUnknownCommand}"
-                IsVisible="{Binding CanLearnUnknown}"
-                HorizontalAlignment="Center"
-                Padding="20,10" />
-
-        <Button Content="Home"
-                Command="{Binding ReturnHomeCommand}"
-                HorizontalAlignment="Center"
-                Padding="20,10" />
-    </StackPanel>
+    </Grid>
 </UserControl>

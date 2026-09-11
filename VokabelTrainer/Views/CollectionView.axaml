@@ -5,21 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="340" d:DesignHeight="640"
-             x:Class="VokabelTrainer.Views.LanguageView"
-             x:DataType="vm:LanguageViewModel">
+             x:Class="VokabelTrainer.Views.CollectionView"
+             x:DataType="vm:CollectionViewModel">
 
     <Grid RowDefinitions="Auto,*,Auto,Auto" Margin="20,24,20,20">
 
         <StackPanel Grid.Row="0" Spacing="2" Margin="0,0,0,14">
-            <TextBlock Text="Sprachen" Classes="title" />
+            <TextBlock Text="Sammlungen" Classes="title" />
             <TextBlock Text="{Binding SelectionInfo}" Classes="muted" />
         </StackPanel>
 
         <ListBox Grid.Row="1"
-                 ItemsSource="{Binding Languages}"
-                 SelectedItem="{Binding SelectedLanguage}">
+                 ItemsSource="{Binding Collections}"
+                 SelectedItem="{Binding SelectedCollection}">
             <ListBox.ItemTemplate>
-                <DataTemplate DataType="models:Language">
+                <DataTemplate DataType="models:Collection">
                     <Border Classes="row"
                             Classes.selected="{Binding $parent[ListBoxItem].IsSelected}">
                         <TextBlock Text="{Binding Name}" FontSize="15" />
@@ -30,7 +30,7 @@
 
         <Border Grid.Row="2" Classes="card" Margin="0,12,0,0">
             <StackPanel Spacing="8">
-                <TextBox Text="{Binding NameInput}" PlaceholderText="Sprache, z.B. Französisch" />
+                <TextBox Text="{Binding NameInput}" PlaceholderText="Sammlung, z.B. Tiere" />
 
                 <Grid ColumnDefinitions="*,Auto,Auto">
                     <Button Grid.Column="0"
@@ -42,14 +42,14 @@
                             Classes="outline icon"
                             Command="{Binding RenameCommand}"
                             Margin="6,0,0,0"
-                            ToolTip.Tip="Sprache umbenennen">
+                            ToolTip.Tip="Sammlung umbenennen">
                         <PathIcon Data="{StaticResource IconEdit}" Width="16" Height="16" />
                     </Button>
                     <Button Grid.Column="2"
                             Classes="danger icon"
                             Command="{Binding DeleteCommand}"
                             Margin="6,0,0,0"
-                            ToolTip.Tip="Sprache löschen">
+                            ToolTip.Tip="Sammlung löschen">
                         <PathIcon Data="{StaticResource IconDelete}" Width="16" Height="16" />
                     </Button>
                 </Grid>

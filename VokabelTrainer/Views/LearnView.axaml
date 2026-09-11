@@ -3,39 +3,73 @@
              xmlns:vm="using:VokabelTrainer.ViewModels"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="320" d:DesignHeight="660"
+             mc:Ignorable="d" d:DesignWidth="340" d:DesignHeight="640"
              x:Class="VokabelTrainer.Views.LearnView"
              x:DataType="vm:LearnViewModel">
 
-    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="20">
+    <Grid RowDefinitions="Auto,*,Auto" Margin="20,24,20,20">
 
-        <TextBlock Text="{Binding ProgressText}"
-                   FontSize="16"
-                   Foreground="Gray"
-                   HorizontalAlignment="Center" />
-
-        <Button Command="{Binding ShowAnswerCommand}"
-                Background="Transparent"
-                HorizontalAlignment="Center">
-            <StackPanel Spacing="10">
-                <TextBlock Text="{Binding Question}"
-                           FontSize="36"
-                           HorizontalAlignment="Center" />
-                <TextBlock Text="{Binding Answer}"
-                           FontSize="28"
-                           Foreground="Gray"
-                           HorizontalAlignment="Center"
-                           IsVisible="{Binding AnswerVisible}" />
-            </StackPanel>
-        </Button>
-
-        <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
-            <Button Content="Nicht gewusst" Command="{Binding NotKnownCommand}" />
-            <Button Content="Gewusst"       Command="{Binding KnownCommand}" />
+        <StackPanel Grid.Row="0" Spacing="8">
+            <TextBlock Text="{Binding ProgressText}" Classes="muted" />
+            <ProgressBar Minimum="0"
+                         Maximum="{Binding TotalCount}"
+                         Value="{Binding CurrentNumber}" />
         </StackPanel>
 
-        <Button Content="Weiter"
-                Command="{Binding NextCommand}"
-                HorizontalAlignment="Center" />
-    </StackPanel>
+        <Button Grid.Row="1"
+                Classes="card"
+                Command="{Binding ShowAnswerCommand}"
+                Margin="0,20">
+            <Grid RowDefinitions="*,Auto,*" Margin="20">
+                <StackPanel Grid.Row="1" Spacing="16">
+                    <TextBlock Text="{Binding Question}"
+                               FontSize="32"
+                               FontWeight="SemiBold"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center"
+                               HorizontalAlignment="Center" />
+
+                    <Rectangle Height="1"
+                               Width="40"
+                               Fill="{StaticResource AppBorder}"
+                               HorizontalAlignment="Center" />
+
+                    <TextBlock Text="{Binding Answer}"
+                               Classes="accent"
+                               FontSize="26"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center"
+                               HorizontalAlignment="Center"
+                               IsVisible="{Binding AnswerVisible}" />
+
+                    <TextBlock Text="Tippen zum Aufdecken"
+                               Classes="muted"
+                               HorizontalAlignment="Center"
+                               IsVisible="{Binding !AnswerVisible}" />
+                </StackPanel>
+            </Grid>
+        </Button>
+
+        <StackPanel Grid.Row="2" Spacing="8">
+            <Grid ColumnDefinitions="*,*">
+                <Button Grid.Column="0"
+                        Content="Nicht gewusst"
+                        Classes="outline"
+                        Command="{Binding NotKnownCommand}"
+                        HorizontalAlignment="Stretch"
+                        Margin="0,0,4,0" />
+                <Button Grid.Column="1"
+                        Content="Gewusst"
+                        Classes="primary"
+                        Command="{Binding KnownCommand}"
+                        HorizontalAlignment="Stretch"
+                        Margin="4,0,0,0" />
+            </Grid>
+
+            <Button Content="Überspringen"
+                    Classes="ghost"
+                    Command="{Binding NextCommand}"
+                    HorizontalAlignment="Center" />
+        </StackPanel>
+    </Grid>
 </UserControl>

@@ -4,97 +4,133 @@
              xmlns:models="using:VokabelTrainer.Models"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="320" d:DesignHeight="660"
+             mc:Ignorable="d" d:DesignWidth="340" d:DesignHeight="600"
              x:Class="VokabelTrainer.Views.WordListView"
              x:DataType="vm:WordListViewModel">
 
-    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto,Auto" Margin="20,20,20,20">
+    <Grid RowDefinitions="Auto,Auto,*,Auto,Auto" Margin="20,24,20,20">
 
-        <TextBlock Grid.Row="0"
-                   Text="{Binding LanguageName}"
-                   FontSize="32"
-                   HorizontalAlignment="Center" />
+        <StackPanel Grid.Row="0" Spacing="2" Margin="0,0,0,12">
+            <TextBlock Text="{Binding LanguageName}" Classes="title" />
+            <TextBlock Text="{Binding CountText}" Classes="muted" />
+        </StackPanel>
 
-        <TextBlock Grid.Row="1"
-                   Text="{Binding CountText}"
-                   FontSize="16"
-                   Foreground="Gray"
-                   Margin="0,4,0,12"
-                   HorizontalAlignment="Center" />
-
-        <Grid Grid.Row="2" ColumnDefinitions="*,Auto" Margin="0,0,0,8">
+        <Grid Grid.Row="1" ColumnDefinitions="*,Auto" Margin="0,0,0,10">
             <TextBox Grid.Column="0"
                      Text="{Binding SearchText}"
-                     PlaceholderText="Suchen..." />
+                     PlaceholderText="Suchen ..." />
             <Button Grid.Column="1"
-                    Content="X"
+                    Classes="ghost icon"
                     Command="{Binding ClearSearchCommand}"
-                    Margin="6,0,0,0" />
+                    Margin="6,0,0,0"
+                    ToolTip.Tip="Suche zurücksetzen">
+                <PathIcon Data="{StaticResource IconClose}" Width="15" Height="15" />
+            </Button>
         </Grid>
 
-        <ListBox Grid.Row="3"
+        <ListBox Grid.Row="2"
                  ItemsSource="{Binding FilteredWords}"
                  SelectedItem="{Binding SelectedWord}">
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="models:Word">
-                    <Grid ColumnDefinitions="*,*,Auto">
-                        <TextBlock Grid.Column="0"
-                                   Text="{Binding German}"
-                                   FontSize="20"
-                                   TextWrapping="Wrap" />
-                        <TextBlock Grid.Column="1"
-                                   Text="{Binding ForeignLanguage}"
-                                   FontSize="20"
-                                   Foreground="Gray"
-                                   TextWrapping="Wrap" />
-                        <TextBlock Grid.Column="2"
-                                   Text="Gewusst"
-                                   FontSize="12"
-                                   Foreground="Green"
-                                   VerticalAlignment="Center"
-                                   IsVisible="{Binding IsKnown}" />
-                    </Grid>
+                    <Border Classes="row"
+                            Classes.selected="{Binding $parent[ListBoxItem].IsSelected}">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <StackPanel Grid.Column="0" Spacing="1">
+                                <TextBlock Text="{Binding German}"
+                                           FontSize="15"
+                                           TextWrapping="Wrap" />
+                                <TextBlock Text="{Binding ForeignLanguage}"
+                                           Classes="muted"
+                                           TextWrapping="Wrap" />
+                            </StackPanel>
+
+                            <Ellipse Grid.Column="1"
+                                     Width="8"
+                                     Height="8"
+                                     Fill="{StaticResource AppAccent}"
+                                     VerticalAlignment="Center"
+                                     Margin="8,0,0,0"
+                                     IsVisible="{Binding IsKnown}" />
+                        </Grid>
+                    </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <StackPanel Grid.Row="4" Spacing="6" Margin="0,16,0,0">
-            <TextBlock Text="{Binding EditorTitle}"
-                       FontSize="18" />
-            <TextBox Text="{Binding GermanInput}"
-                     PlaceholderText="Deutsch" />
-            <TextBox Text="{Binding ForeignInput}"
-                     PlaceholderText="Fremdsprache" />
-            <Grid ColumnDefinitions="*,*,*" Margin="0,4,0,0">
-                <Button Grid.Column="0"
-                        Content="Speichern"
-                        Command="{Binding SaveCommand}"
-                        HorizontalAlignment="Stretch"
-                        HorizontalContentAlignment="Center"
-                        Margin="0,0,4,0" />
-                <Button Grid.Column="1"
-                        Content="Löschen"
-                        Command="{Binding DeleteCommand}"
-                        HorizontalAlignment="Stretch"
-                        HorizontalContentAlignment="Center"
-                        Margin="2,0,2,0" />
-                <Button Grid.Column="2"
-                        Content="Neu"
-                        Command="{Binding NewWordCommand}"
-                        HorizontalAlignment="Stretch"
-                        HorizontalContentAlignment="Center"
-                        Margin="4,0,0,0" />
-            </Grid>
-        </StackPanel>
+        <Button Grid.Row="3"
+                Classes="outline"
+                Command="{Binding OpenEditorCommand}"
+                HorizontalAlignment="Stretch"
+                Margin="0,10,0,0"
+                IsVisible="{Binding !EditorVisible}">
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <PathIcon Data="{StaticResource IconAdd}" Width="16" Height="16" />
+                <TextBlock Text="Wort hinzufügen" />
+            </StackPanel>
+        </Button>
 
-        <StackPanel Grid.Row="5" Spacing="10" Margin="0,16,0,0">
-            <Button Content="Abfrage starten"
-                    Command="{Binding StartCommand}"
-                    HorizontalAlignment="Center"
-                    Padding="20,10" />
-            <Button Content="Zurück"
+        <Border Grid.Row="3"
+                Classes="card"
+                Margin="0,10,0,0"
+                IsVisible="{Binding EditorVisible}">
+            <StackPanel Spacing="8">
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Grid.Column="0"
+                               Text="{Binding EditorTitle}"
+                               Classes="heading"
+                               VerticalAlignment="Center" />
+                    <Button Grid.Column="1"
+                            Classes="ghost icon"
+                            Command="{Binding CloseEditorCommand}"
+                            ToolTip.Tip="Schliessen">
+                        <PathIcon Data="{StaticResource IconClose}" Width="14" Height="14" />
+                    </Button>
+                </Grid>
+
+                <TextBox Text="{Binding GermanInput}" PlaceholderText="Deutsch" />
+                <TextBox Text="{Binding ForeignInput}" PlaceholderText="Fremdsprache" />
+
+                <ComboBox ItemsSource="{Binding EditorCollections}"
+                          SelectedItem="{Binding SelectedEditorCollection}"
+                          HorizontalAlignment="Stretch">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate DataType="models:Collection">
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <Grid ColumnDefinitions="*,Auto" Margin="0,2,0,0">
+                    <Button Grid.Column="0"
+                            Content="Speichern"
+                            Classes="primary"
+                            Command="{Binding SaveCommand}"
+                            HorizontalAlignment="Stretch" />
+                    <Button Grid.Column="1"
+                            Classes="danger icon"
+                            Command="{Binding DeleteCommand}"
+                            Margin="6,0,0,0"
+                            ToolTip.Tip="Wort löschen">
+                        <PathIcon Data="{StaticResource IconDelete}" Width="16" Height="16" />
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </Border>
+
+        <Grid Grid.Row="4" ColumnDefinitions="Auto,*" Margin="0,10,0,0">
+            <Button Grid.Column="0"
+                    Classes="ghost icon"
                     Command="{Binding ReturnHomeCommand}"
-                    HorizontalAlignment="Center" />
-        </StackPanel>
+                    ToolTip.Tip="Zurück">
+                <PathIcon Data="{StaticResource IconBack}" Width="16" Height="16" />
+            </Button>
+            <Button Grid.Column="1"
+                    Content="Abfrage starten"
+                    Classes="primary"
+                    Command="{Binding StartCommand}"
+                    HorizontalAlignment="Stretch"
+                    Margin="8,0,0,0" />
+        </Grid>
     </Grid>
 </UserControl>

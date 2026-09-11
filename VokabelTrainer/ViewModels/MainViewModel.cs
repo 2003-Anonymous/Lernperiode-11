@@ -8,18 +8,18 @@ namespace VokabelTrainer.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {
-    // Die gerade angezeigte Seite. Typ ViewModelBase -> kann jedes ViewModel aufnehmen.
     [ObservableProperty]
     public partial ViewModelBase CurrentPage { get; set; }
 
     public MainViewModel()
     {
-        CurrentPage = new StartViewModel(this);   // Startseite
+        CurrentPage = new StartViewModel(this);
     }
 
     public void ShowStart() => CurrentPage = new StartViewModel(this);
     public void ShowWordList() => CurrentPage = new WordListViewModel(this);
     public void ShowLanguages() => CurrentPage = new LanguageViewModel(this);
+    public void ShowCollections() => CurrentPage = new CollectionViewModel(this);
 
     public void ShowLearn(bool onlyUnknown)
     {
@@ -47,7 +47,6 @@ public partial class MainViewModel : ViewModelBase
         }
     }
 
-    // Die Lernseite reicht ihre Ergebnisse hier durch an die Ergebnisseite.
     public void ShowResult(List<Word> known, List<Word> unknown)
         => CurrentPage = new ResultViewModel(this, known, unknown);
 }

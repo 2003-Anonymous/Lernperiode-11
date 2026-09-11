@@ -14,13 +14,18 @@ public partial class WordListViewModel : ViewModelBase
 
     public ObservableCollection<Word> FilteredWords { get; } = [];
 
+    public ObservableCollection<Collection> EditorCollections { get; } = [];
+
     public string LanguageName => WordList.CurrentLanguage?.Name ?? "Keine Sprache";
 
     public string CountText =>
-        $"{FilteredWords.Count} von {WordList.Words.Count} Wörtern - {WordList.UnknownCount} offen, {WordList.KnownCount} gewusst";
+        $"{FilteredWords.Count} von {WordList.Words.Count} Wörtern · {WordList.UnknownCount} offen";
 
     [ObservableProperty]
     public partial string SearchText { get; set; } = "";
+
+    [ObservableProperty]
+    public partial bool EditorVisible { get; set; }
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(SaveCommand))]
@@ -29,6 +34,9 @@ public partial class WordListViewModel : ViewModelBase
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(SaveCommand))]
     public partial string ForeignInput { get; set; } = "";
+
+    [ObservableProperty]
+    public partial Collection? SelectedEditorCollection { get; set; }
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(DeleteCommand))]
@@ -44,7 +52,23 @@ public partial class WordListViewModel : ViewModelBase
     {
         _main = main;
         WordList.Words.CollectionChanged += OnWordsChanged;
+
+        LoadEditorCollections();
         ApplyFilter();
+        ResetEditor();
+    }
+
+    private void LoadEditorCollections()
+    {
+        var languageId = WordList.CurrentLanguage?.Id ?? 0;
+
+        EditorCollections.Clear();
+        EditorCollections.Add(new Collection(0, languageId, "Keine Sammlung"));
+
+        foreach (var collection in WordList.Collections.Where(item => item.Id != 0))
+        {
+            EditorCollections.Add(collection);
+        }
     }
 
     private void OnWordsChanged(object? sender, NotifyCollectionChangedEventArgs e) => ApplyFilter();
@@ -79,6 +103,27 @@ public partial class WordListViewModel : ViewModelBase
     {
         GermanInput = value?.German ?? "";
         ForeignInput = value?.ForeignLanguage ?? "";
+        SelectedEditorCollection = FindEditorCollection(value?.CollectionId);
+
+        if (value is not null)
+        {
+            EditorVisible = true;
+        }
+    }
+
+    private Collection? FindEditorCollection(int? collectionId)
+        => EditorCollections.FirstOrDefault(collection => collection.Id == (collectionId ?? 0))
+           ?? EditorCollections.FirstOrDefault();
+
+    private int? ChosenCollectionId()
+        => SelectedEditorCollection is { Id: > 0 } collection ? collection.Id : null;
+
+    private void ResetEditor()
+    {
+        SelectedWord = null;
+        GermanInput = "";
+        ForeignInput = "";
+        SelectedEditorCollection = EditorCollections.FirstOrDefault();
     }
 
     [RelayCommand(CanExecute = nameof(CanSave))]
@@ -89,15 +134,16 @@ public partial class WordListViewModel : ViewModelBase
 
         if (SelectedWord is { } word)
         {
-            WordList.Update(word, german, foreignLanguage);
+            WordList.Update(word, german, foreignLanguage, ChosenCollectionId());
             ApplyFilter();
         }
         else
         {
-            WordList.Add(german, foreignLanguage);
+            WordList.Add(german, foreignLanguage, ChosenCollectionId());
         }
 
-        NewWord();
+        ResetEditor();
+        EditorVisible = false;
     }
 
     private bool CanDelete() => SelectedWord is not null;
@@ -108,16 +154,23 @@ public partial class WordListViewModel : ViewModelBase
         if (SelectedWord is { } word)
         {
             WordList.Remove(word);
-            NewWord();
+            ResetEditor();
+            EditorVisible = false;
         }
     }
 
     [RelayCommand]
-    private void NewWord()
+    private void OpenEditor()
     {
-        SelectedWord = null;
-        GermanInput = "";
-        ForeignInput = "";
+        ResetEditor();
+        EditorVisible = true;
+    }
+
+    [RelayCommand]
+    private void CloseEditor()
+    {
+        ResetEditor();
+        EditorVisible = false;
     }
 
     [RelayCommand]

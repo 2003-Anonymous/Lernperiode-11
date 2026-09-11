@@ -57,11 +57,18 @@ public static class WordDatabase
                 Key   TEXT PRIMARY KEY,
                 Value TEXT NOT NULL
             );
+
+            CREATE TABLE IF NOT EXISTS Collections (
+                Id         INTEGER PRIMARY KEY AUTOINCREMENT,
+                LanguageId INTEGER NOT NULL,
+                Name       TEXT NOT NULL
+            );
             """;
         create.ExecuteNonQuery();
 
         AddColumnIfMissing(connection, "Words", "IsKnown", "INTEGER NOT NULL DEFAULT 0");
         AddColumnIfMissing(connection, "Words", "LanguageId", "INTEGER NOT NULL DEFAULT 1");
+        AddColumnIfMissing(connection, "Words", "CollectionId", "INTEGER NULL");
 
         var defaultLanguageId = EnsureDefaultLanguage(connection);
 
@@ -173,6 +180,19 @@ public static class WordDatabase
         return InsertLanguage(connection, name);
     }
 
+    public static int InsertCollection(string name, int languageId)
+    {
+        using var connection = OpenConnection();
+
+        using var insert = connection.CreateCommand();
+        insert.CommandText =
+            "INSERT INTO Collections (LanguageId, Name) VALUES ($language, $name); SELECT last_insert_rowid();";
+        insert.Parameters.AddWithValue("$language", languageId);
+        insert.Parameters.AddWithValue("$name", name);
+
+        return Convert.ToInt32(insert.ExecuteScalar());
+    }
+
     public static void UpdateLanguage(Language language)
     {
         using var connection = OpenConnection();
@@ -204,55 +224,127 @@ public static class WordDatabase
         transaction.Commit();
     }
 
-    public static List<Word> LoadWords(int languageId)
+    public static void UpdateCollection(Collection collection)
+    {
+        using var connection = OpenConnection();
+
+        using var update = connection.CreateCommand();
+        update.CommandText = "UPDATE Collections SET Name = $name WHERE Id = $id;";
+        update.Parameters.AddWithValue("$name", collection.Name);
+        update.Parameters.AddWithValue("$id", collection.Id);
+        update.ExecuteNonQuery();
+    }
+
+    public static void DeleteCollection(Collection collection)
+    {
+        using var connection = OpenConnection();
+        using var transaction = connection.BeginTransaction();
+
+        using var freeWords = connection.CreateCommand();
+        freeWords.Transaction = transaction;
+        freeWords.CommandText = "UPDATE Words SET CollectionId = NULL WHERE CollectionId = $id;";
+        freeWords.Parameters.AddWithValue("$id", collection.Id);
+        freeWords.ExecuteNonQuery();
+
+        using var deleteCollection = connection.CreateCommand();
+        deleteCollection.Transaction = transaction;
+        deleteCollection.CommandText = "DELETE FROM Collections WHERE Id = $id;";
+        deleteCollection.Parameters.AddWithValue("$id", collection.Id);
+        deleteCollection.ExecuteNonQuery();
+
+        transaction.Commit();
+    }
+
+    public static List<Collection> LoadCollections(int languageId)
     {
         using var connection = OpenConnection();
 
         using var select = connection.CreateCommand();
         select.CommandText =
-            "SELECT Id, German, ForeignLanguage, IsKnown FROM Words WHERE LanguageId = $language ORDER BY Id;";
+            "SELECT Id, LanguageId, Name FROM Collections WHERE LanguageId = $language ORDER BY Name;";
+            select.Parameters.AddWithValue("$language", languageId);
+
+            var collections = new List<Collection>();
+
+            using var reader = select.ExecuteReader();
+            while (reader.Read())
+            {
+                collections.Add(new Collection(
+                    reader.GetInt32(0),
+                    reader.GetInt32(1),
+                    reader.GetString(2)));
+                
+            }
+
+            return collections;
+    }
+    public static List<Word> LoadWords(int languageId, int? collectionId = null)
+    {
+        using var connection = OpenConnection();
+
+        using var select = connection.CreateCommand();
+        select.CommandText = collectionId is null
+            ? "SELECT Id, German, ForeignLanguage, IsKnown, CollectionId FROM Words WHERE LanguageId = $language ORDER BY Id;"
+            : "SELECT Id, German, ForeignLanguage, IsKnown, CollectionId FROM Words WHERE LanguageId = $language AND CollectionId = $collection ORDER BY Id;";
         select.Parameters.AddWithValue("$language", languageId);
+
+        if (collectionId is not null)
+        {
+            select.Parameters.AddWithValue("$collection", collectionId);
+        }
 
         var words = new List<Word>();
 
         using var reader = select.ExecuteReader();
         while (reader.Read())
         {
-            words.Add(new Word(
+            var word = new Word(
                 reader.GetInt32(0),
                 reader.GetString(1),
                 reader.GetString(2),
-                reader.GetBoolean(3)));
+                reader.GetBoolean(3));
+
+            word.CollectionId = reader.IsDBNull(4) ? null : reader.GetInt32(4);
+
+            words.Add(word);
         }
 
         return words;
     }
 
-    public static int CountWords(int languageId)
+    public static int CountWords(int languageId, int? collectionId = null)
     {
         using var connection = OpenConnection();
 
         using var count = connection.CreateCommand();
-        count.CommandText = "SELECT COUNT(*) FROM Words WHERE LanguageId = $language;";
+        count.CommandText = collectionId is null
+            ? "SELECT COUNT(*) FROM Words WHERE LanguageId = $language;"
+            : "SELECT COUNT(*) FROM Words WHERE LanguageId = $language AND CollectionId = $collection;";
         count.Parameters.AddWithValue("$language", languageId);
+
+        if (collectionId is not null)
+        {
+            count.Parameters.AddWithValue("$collection", collectionId);
+        }
 
         return Convert.ToInt32(count.ExecuteScalar());
     }
 
-    public static int Insert(string german, string foreignLanguage, int languageId)
+    public static int Insert(string german, string foreignLanguage, int languageId, int? collectionId)
     {
         using var connection = OpenConnection();
 
         using var insert = connection.CreateCommand();
         insert.CommandText =
             """
-            INSERT INTO Words (German, ForeignLanguage, IsKnown, LanguageId)
-            VALUES ($german, $foreign, 0, $language);
+            INSERT INTO Words (German, ForeignLanguage, IsKnown, LanguageId, CollectionId)
+            VALUES ($german, $foreign, 0, $language, $collection);
             SELECT last_insert_rowid();
             """;
         insert.Parameters.AddWithValue("$german", german);
         insert.Parameters.AddWithValue("$foreign", foreignLanguage);
         insert.Parameters.AddWithValue("$language", languageId);
+        insert.Parameters.AddWithValue("$collection", collectionId ?? (object)DBNull.Value);
 
         return Convert.ToInt32(insert.ExecuteScalar());
     }
@@ -263,10 +355,15 @@ public static class WordDatabase
 
         using var update = connection.CreateCommand();
         update.CommandText =
-            "UPDATE Words SET German = $german, ForeignLanguage = $foreign, IsKnown = $known WHERE Id = $id;";
+            """
+            UPDATE Words SET German = $german, ForeignLanguage = $foreign, IsKnown = $known,
+                             CollectionId = $collection
+            WHERE Id = $id;
+            """;
         update.Parameters.AddWithValue("$german", word.German);
         update.Parameters.AddWithValue("$foreign", word.ForeignLanguage);
         update.Parameters.AddWithValue("$known", word.IsKnown);
+        update.Parameters.AddWithValue("$collection", word.CollectionId ?? (object)DBNull.Value);
         update.Parameters.AddWithValue("$id", word.Id);
         update.ExecuteNonQuery();
     }

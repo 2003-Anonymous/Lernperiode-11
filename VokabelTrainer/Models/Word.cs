@@ -15,6 +15,8 @@ public partial class Word : ObservableObject
     [ObservableProperty]
     public partial bool IsKnown { get; set; }
 
+    public int? CollectionId { get; set; }
+
     public Word(string german, string foreignLanguage)
     {
         German = german;

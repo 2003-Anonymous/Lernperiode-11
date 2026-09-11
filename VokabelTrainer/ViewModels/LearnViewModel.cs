@@ -25,6 +25,11 @@ public partial class LearnViewModel : ViewModelBase
     [ObservableProperty]
     public partial string ProgressText { get; set; } = "";
 
+    [ObservableProperty]
+    public partial int CurrentNumber { get; set; }
+
+    public int TotalCount => _words.Count;
+
     public List<Word> KnownWords { get; } = [];
     public List<Word> UnknownWords { get; } = [];
 
@@ -39,14 +44,14 @@ public partial class LearnViewModel : ViewModelBase
     {
         if (_index >= _words.Count)
         {
-            // Liste durch -> Ergebnisse weiterreichen und Ergebnisseite zeigen
             _main.ShowResult(KnownWords, UnknownWords);
             return;
         }
 
         Question = _words[_index].German;
         Answer = _words[_index].ForeignLanguage;
-        ProgressText = $"{_index + 1} von {_words.Count}";
+        CurrentNumber = _index + 1;
+        ProgressText = $"Wort {CurrentNumber} von {_words.Count}";
         AnswerVisible = false;
     }
 

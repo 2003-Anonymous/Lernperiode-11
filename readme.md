@@ -43,7 +43,19 @@ Heute habe ich die Wortliste bearbeitbar gemacht: Wörter lassen sich hinzufüge
 ## 11.9
 
 - [x] Als Benutzer möchte ich mehrere Sprachen anlegen können, damit ich in derselben App zum Beispiel Polnisch und Französisch getrennt voneinander lernen kann.
-- [ ] Als Benutzer möchte ich innerhalb einer Sprache eigene Sammlungen wie "Tiere" oder "Zahlen" erstellen können, damit ich gezielt ein einzelnes Thema üben kann.
-- [ ] Als Benutzer möchte ich eine Sammlung auswählen und nur deren Wörter abgefragt bekommen, damit ich nicht immer alle Wörter einer Sprache durchgehen muss.
+- [x] Als Benutzer möchte ich innerhalb einer Sprache eigene Sammlungen wie "Tiere" oder "Zahlen" erstellen können, damit ich gezielt ein einzelnes Thema üben kann.
+- [x] Als Benutzer möchte ich eine Sammlung auswählen und nur deren Wörter abgefragt bekommen, damit ich nicht immer alle Wörter einer Sprache durchgehen muss.
 
 Heute habe ich eingebaut, dass ich mehrere Sprachen anlegen kann. Dafür gibt es in der Datenbank eine neue Tabelle "Languages", und jedes Wort gehört über eine LanguageId zu einer Sprache. Auf der Startseite kann ich die Sprache in einem Auswahlfeld wechseln, und die Auswahl wird gespeichert, sodass beim nächsten Start wieder dieselbe Sprache aktiv ist. Über den Knopf "Sprachen verwalten" komme ich auf eine neue Seite, wo ich Sprachen hinzufügen, umbenennen und löschen kann. Die Wortliste und die Abfrage zeigen immer nur die Wörter der gewählten Sprache. Etwas knifflig war, dass meine Datenbank ja schon Wörter enthielt. Diese werden beim Start automatisch der Sprache "Polnisch" zugeordnet, damit nichts verloren geht.
+
+Danach habe ich die Sammlungen umgesetzt. In der Datenbank gibt es dafür eine neue Tabelle "Collections", und jedes Wort kann über eine CollectionId zu einer Sammlung gehören. Weil ein Wort auch zu keiner Sammlung gehören darf, ist diese Spalte NULL erlaubt. Auf der Startseite gibt es jetzt ein zweites Auswahlfeld, in dem ich die Sammlung wähle, und über "Sammlungen verwalten" kann ich Sammlungen anlegen, umbenennen und löschen. Beim Löschen einer Sammlung bleiben die Wörter erhalten, sie verlieren nur ihre Zuordnung. In der Wortliste kann ich bei jedem Wort auswählen, zu welcher Sammlung es gehört. Als Test habe ich für Polnisch die Sammlungen Tiere, Personen und Nahrung angelegt und mit Wörtern gefüllt.
+
+Am meisten aufgepasst habe ich beim Eintrag "Alle Wörter" in der Auswahlliste. Das ist keine echte Sammlung aus der Datenbank, sondern nur ein Platzhalter mit der Id 0. Wenn er ausgewählt ist, wird nicht gefiltert. Beim Umbenennen und Löschen muss man ihn ausschliessen, sonst würde die App versuchen, einen Datensatz zu ändern, den es gar nicht gibt.
+
+
+##Fertiges Projekt
+Ich habe einen Vokabeltrainer mit Avalonia programmiert. Man kann aus verschiedenen Sprachen auswählen und in der Sprache auch noch Collections erstellen, um die Wörter besser zu sortieren. Wörter können einfach in der App hinzugefügt, bearbeitet oder gelöscht werden und werden dann in einer SQLite-Datenbank gespeichert. Gewusste Wörter kann man beim lernen markieren und dann nur noch die offenen Wörter lernen. Am Ende jedes Lerndurchganges erhält man eine übersicht, wie viele Wörter man gewusst hat. Auf der Startseite ist auch ersichtlich, wie viele Wörter man schon kann.
+
+
+##Reflexion
+Meiner Meinung nach war es ein sehr interessantes Projekt und ich habe gelernt, wie ich mithilfe von Avalonia eine Mobile-App programmieren kann. Das Programmieren selbst hat mir aber nicht allzu grosse Freude bereitet. Obwohl es C# war, hat es sich nicht danach angefühlt, da es sehr viele neue Befehle gab und ganz anders aufgebaut war, als das, was ich bisher verwendet habe. Anfangs war die Struktur ein wenig kompliziert und ich habe nicht gleich verstanden, was jetzt in welche Datei kommt und wie diese miteinader funktionieren. Alles in allem war es eine wertvolle Erfahrung.
