@@ -53,11 +53,11 @@ Danach habe ich die Sammlungen umgesetzt. In der Datenbank gibt es dafür eine n
 Am meisten aufgepasst habe ich beim Eintrag "Alle Wörter" in der Auswahlliste. Das ist keine echte Sammlung aus der Datenbank, sondern nur ein Platzhalter mit der Id 0. Wenn er ausgewählt ist, wird nicht gefiltert. Beim Umbenennen und Löschen muss man ihn ausschliessen, sonst würde die App versuchen, einen Datensatz zu ändern, den es gar nicht gibt.
 
 
-##Fertiges Projekt
+## Fertiges Projekt
 Ich habe einen Vokabeltrainer mit Avalonia programmiert. Man kann aus verschiedenen Sprachen auswählen und in der Sprache auch noch Collections erstellen, um die Wörter besser zu sortieren. Wörter können einfach in der App hinzugefügt, bearbeitet oder gelöscht werden und werden dann in einer SQLite-Datenbank gespeichert. Gewusste Wörter kann man beim lernen markieren und dann nur noch die offenen Wörter lernen. Am Ende jedes Lerndurchganges erhält man eine übersicht, wie viele Wörter man gewusst hat. Auf der Startseite ist auch ersichtlich, wie viele Wörter man schon kann.
 
 <img width="512" height="940" alt="Lernperiode_11" src="https://github.com/user-attachments/assets/fa10c500-fbdd-4e5a-8493-e4ad5c9fe2de" />
 
 
-##Reflexion
+## Reflexion
 Meiner Meinung nach war es ein sehr interessantes Projekt und ich habe gelernt, wie ich mithilfe von Avalonia eine Mobile-App programmieren kann. Das Programmieren selbst hat mir aber nicht allzu grosse Freude bereitet. Obwohl es C# war, hat es sich nicht danach angefühlt, da es sehr viele neue Befehle gab und ganz anders aufgebaut war, als das, was ich bisher verwendet habe. Anfangs war die Struktur ein wenig kompliziert und ich habe nicht gleich verstanden, was jetzt in welche Datei kommt und wie diese miteinader funktionieren. Alles in allem war es eine wertvolle Erfahrung.
