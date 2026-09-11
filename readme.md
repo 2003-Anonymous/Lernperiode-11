@@ -1,3 +1,4 @@
+<img width="512" height="940" alt="Lernperiode_11" src="https://github.com/user-attachments/assets/04aff649-d96c-4f60-844f-7178882ec298" />
 # Lernperiode 11
 
 14.8 bis 11.9.2024
